@@ -13,4 +13,4 @@ COPY . .
 EXPOSE 7860
 
 # Run the app binding it to global traffic on port 7860
-CMD ["python", "app.py"]
+CMD ["python", "Backend/app.py"]
