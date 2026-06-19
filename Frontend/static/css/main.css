@@ -59,7 +59,28 @@
   --card-bg:       #16162a;
   --glass:         rgba(22,22,42,.75);
   --glass-border:  rgba(255,255,255,.07);
-  --grad-card:     linear-gradient(135deg, rgba(124,115,255,.08) 0%, rgba(67,230,178,.05) 100%);
+  /* Hero/banner gradient is pulled darker & richer here so it sits naturally
+     against the near-black page background instead of looking like a
+     light-mode element that got pasted onto a dark page. */
+  --grad-hero:     linear-gradient(135deg, #2c2566 0%, #4a2a86 45%, #0d8f74 100%);
+  --grad-primary:  linear-gradient(135deg, #7c73ff 0%, #43e6b2 100%);
+  --grad-card:     linear-gradient(135deg, rgba(124,115,255,.14) 0%, rgba(67,230,178,.09) 100%);
+}
+
+/* Gradient sections need a defining edge in dark mode so they don't look
+   like a flat color block floating on the page — a faint border plus
+   slightly stronger shadow gives them the same "lifted" feel they have
+   in light mode. */
+[data-theme="dark"] .hero,
+[data-theme="dark"] .auth-left,
+[data-theme="dark"] .career-hero-banner,
+[data-theme="dark"] .welcome-banner,
+[data-theme="dark"] .section-cta {
+  border: 1px solid rgba(255,255,255,.06);
+}
+[data-theme="dark"] .career-hero-banner,
+[data-theme="dark"] .welcome-banner {
+  box-shadow: var(--shadow-lg);
 }
 
 /* ── Reset & Base ──────────────────────────────────────────────── */
@@ -1105,6 +1126,23 @@ img { max-width: 100%; display: block; }
   .assessment-nav .btn-primary-grad,
   .assessment-nav .btn-outline-primary-cp { width: 100%; justify-content: center; }
   .rank-card-body { padding: 1.1rem; }
+}
+
+/* Bootstrap's default gutter (--bs-gutter-x: 1.5rem) only gives the
+   container .75rem of padding on each side, which reads as "no margin"
+   on a phone. Bumping the gutter variable keeps every nested .row/.col
+   offset in sync automatically — no edge-to-edge bleed anywhere. */
+@media (max-width: 576px) {
+  .container,
+  .container-fluid { --bs-gutter-x: 2.25rem; }
+
+  body { overflow-x: hidden; }
+
+  .cp-card, .feat-card, .stat-card, .history-card,
+  .rank-card-body, .q-card, .answer-card { padding: 1.25rem; }
+
+  .auth-right { padding: 2.5rem 1.5rem; }
+  .career-hero-banner, .welcome-banner { padding: 2rem 1.5rem; }
 }
 
 @media (max-width: 480px) {
