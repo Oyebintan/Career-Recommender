@@ -1,0 +1,317 @@
+question_id,career_name,weight
+1,Software Engineer,5
+2,Software Engineer,5
+9,Software Engineer,5
+10,Software Engineer,5
+11,Software Engineer,5
+12,Software Engineer,5
+13,Software Engineer,5
+14,Software Engineer,5
+29,Software Engineer,5
+34,Software Engineer,5
+1,Web Developer,5
+2,Web Developer,5
+9,Web Developer,5
+10,Web Developer,5
+11,Web Developer,5
+12,Web Developer,5
+13,Web Developer,5
+14,Web Developer,5
+29,Web Developer,5
+34,Web Developer,5
+1,Mobile App Developer,5
+2,Mobile App Developer,5
+9,Mobile App Developer,5
+10,Mobile App Developer,5
+11,Mobile App Developer,5
+12,Mobile App Developer,5
+13,Mobile App Developer,5
+14,Mobile App Developer,5
+29,Mobile App Developer,5
+34,Mobile App Developer,5
+1,Data Scientist,5
+2,Data Scientist,5
+9,Data Scientist,5
+10,Data Scientist,5
+11,Data Scientist,5
+12,Data Scientist,5
+13,Data Scientist,5
+14,Data Scientist,5
+29,Data Scientist,5
+34,Data Scientist,5
+1,Data Analyst,5
+2,Data Analyst,5
+9,Data Analyst,5
+10,Data Analyst,5
+11,Data Analyst,5
+12,Data Analyst,5
+13,Data Analyst,5
+14,Data Analyst,5
+29,Data Analyst,5
+34,Data Analyst,5
+1,Machine Learning Engineer,5
+2,Machine Learning Engineer,5
+9,Machine Learning Engineer,5
+10,Machine Learning Engineer,5
+11,Machine Learning Engineer,5
+12,Machine Learning Engineer,5
+13,Machine Learning Engineer,5
+14,Machine Learning Engineer,5
+29,Machine Learning Engineer,5
+34,Machine Learning Engineer,5
+1,Cybersecurity Analyst,5
+2,Cybersecurity Analyst,5
+9,Cybersecurity Analyst,5
+10,Cybersecurity Analyst,5
+11,Cybersecurity Analyst,5
+12,Cybersecurity Analyst,5
+13,Cybersecurity Analyst,5
+14,Cybersecurity Analyst,5
+29,Cybersecurity Analyst,5
+34,Cybersecurity Analyst,5
+1,Network Engineer,5
+2,Network Engineer,5
+9,Network Engineer,5
+10,Network Engineer,5
+11,Network Engineer,5
+12,Network Engineer,5
+13,Network Engineer,5
+14,Network Engineer,5
+29,Network Engineer,5
+34,Network Engineer,5
+1,Cloud Engineer,5
+2,Cloud Engineer,5
+9,Cloud Engineer,5
+10,Cloud Engineer,5
+11,Cloud Engineer,5
+12,Cloud Engineer,5
+13,Cloud Engineer,5
+14,Cloud Engineer,5
+29,Cloud Engineer,5
+34,Cloud Engineer,5
+1,DevOps Engineer,5
+2,DevOps Engineer,5
+9,DevOps Engineer,5
+10,DevOps Engineer,5
+11,DevOps Engineer,5
+12,DevOps Engineer,5
+13,DevOps Engineer,5
+14,DevOps Engineer,5
+29,DevOps Engineer,5
+34,DevOps Engineer,5
+1,Database Administrator,5
+2,Database Administrator,5
+9,Database Administrator,5
+10,Database Administrator,5
+11,Database Administrator,5
+12,Database Administrator,5
+13,Database Administrator,5
+14,Database Administrator,5
+29,Database Administrator,5
+34,Database Administrator,5
+1,UI/UX Designer,5
+2,UI/UX Designer,5
+9,UI/UX Designer,5
+10,UI/UX Designer,5
+11,UI/UX Designer,5
+12,UI/UX Designer,5
+13,UI/UX Designer,5
+14,UI/UX Designer,5
+29,UI/UX Designer,5
+34,UI/UX Designer,5
+1,Product Manager,5
+2,Product Manager,5
+9,Product Manager,5
+10,Product Manager,5
+11,Product Manager,5
+12,Product Manager,5
+13,Product Manager,5
+14,Product Manager,5
+29,Product Manager,5
+34,Product Manager,5
+8,Accountant,5
+10,Accountant,5
+13,Accountant,5
+23,Accountant,3
+26,Accountant,5
+31,Accountant,3
+35,Accountant,3
+8,Auditor,5
+10,Auditor,5
+13,Auditor,5
+23,Auditor,3
+26,Auditor,5
+31,Auditor,3
+35,Auditor,3
+8,Financial Analyst,5
+10,Financial Analyst,5
+13,Financial Analyst,5
+23,Financial Analyst,3
+26,Financial Analyst,5
+31,Financial Analyst,3
+35,Financial Analyst,3
+8,Tax Consultant,5
+10,Tax Consultant,5
+13,Tax Consultant,5
+23,Tax Consultant,3
+26,Tax Consultant,5
+31,Tax Consultant,3
+35,Tax Consultant,3
+8,Banker,5
+10,Banker,5
+13,Banker,5
+23,Banker,3
+26,Banker,5
+31,Banker,3
+35,Banker,3
+8,Business Analyst,5
+10,Business Analyst,5
+13,Business Analyst,5
+23,Business Analyst,3
+26,Business Analyst,5
+31,Business Analyst,3
+35,Business Analyst,3
+8,Management Consultant,5
+10,Management Consultant,5
+13,Management Consultant,5
+23,Management Consultant,3
+26,Management Consultant,5
+31,Management Consultant,3
+35,Management Consultant,3
+5,Lawyer,5
+9,Lawyer,5
+14,Lawyer,5
+22,Lawyer,5
+24,Lawyer,5
+25,Lawyer,5
+27,Lawyer,5
+5,Corporate Lawyer,5
+9,Corporate Lawyer,5
+14,Corporate Lawyer,5
+22,Corporate Lawyer,5
+24,Corporate Lawyer,5
+25,Corporate Lawyer,5
+27,Corporate Lawyer,5
+5,Legal Adviser,5
+9,Legal Adviser,5
+14,Legal Adviser,5
+22,Legal Adviser,5
+24,Legal Adviser,5
+25,Legal Adviser,5
+27,Legal Adviser,5
+5,Compliance Officer,5
+9,Compliance Officer,5
+14,Compliance Officer,5
+22,Compliance Officer,5
+24,Compliance Officer,5
+25,Compliance Officer,5
+27,Compliance Officer,5
+5,Legal Researcher,5
+9,Legal Researcher,5
+14,Legal Researcher,5
+22,Legal Researcher,5
+24,Legal Researcher,5
+25,Legal Researcher,5
+27,Legal Researcher,5
+4,Journalist,5
+5,Journalist,5
+17,Journalist,5
+24,Journalist,5
+28,Journalist,5
+33,Journalist,5
+4,Public Relations Officer,5
+5,Public Relations Officer,5
+17,Public Relations Officer,5
+24,Public Relations Officer,5
+28,Public Relations Officer,5
+33,Public Relations Officer,5
+4,Broadcaster,5
+5,Broadcaster,5
+17,Broadcaster,5
+24,Broadcaster,5
+28,Broadcaster,5
+33,Broadcaster,5
+4,Content Creator,5
+5,Content Creator,5
+17,Content Creator,5
+24,Content Creator,5
+28,Content Creator,5
+33,Content Creator,5
+4,Digital Marketer,5
+5,Digital Marketer,5
+17,Digital Marketer,5
+24,Digital Marketer,5
+28,Digital Marketer,5
+33,Digital Marketer,5
+4,Social Media Manager,5
+5,Social Media Manager,5
+17,Social Media Manager,5
+24,Social Media Manager,5
+28,Social Media Manager,5
+33,Social Media Manager,5
+4,Copywriter,5
+5,Copywriter,5
+17,Copywriter,5
+24,Copywriter,5
+28,Copywriter,5
+33,Copywriter,5
+6,Doctor,5
+7,Doctor,5
+18,Doctor,5
+20,Doctor,3
+25,Doctor,5
+30,Doctor,5
+6,Pharmacist,5
+7,Pharmacist,5
+18,Pharmacist,5
+20,Pharmacist,3
+25,Pharmacist,5
+30,Pharmacist,5
+6,Nurse,5
+7,Nurse,5
+18,Nurse,5
+20,Nurse,3
+25,Nurse,5
+30,Nurse,5
+6,Medical Laboratory Scientist,5
+7,Medical Laboratory Scientist,5
+18,Medical Laboratory Scientist,5
+20,Medical Laboratory Scientist,3
+25,Medical Laboratory Scientist,5
+30,Medical Laboratory Scientist,5
+6,Biochemist,5
+7,Biochemist,5
+18,Biochemist,5
+20,Biochemist,3
+25,Biochemist,5
+30,Biochemist,5
+1,Civil Engineer,5
+7,Civil Engineer,5
+19,Civil Engineer,5
+22,Civil Engineer,5
+25,Civil Engineer,5
+30,Civil Engineer,5
+1,Mechanical Engineer,5
+7,Mechanical Engineer,5
+19,Mechanical Engineer,5
+22,Mechanical Engineer,5
+25,Mechanical Engineer,5
+30,Mechanical Engineer,5
+1,Electrical Engineer,5
+7,Electrical Engineer,5
+19,Electrical Engineer,5
+22,Electrical Engineer,5
+25,Electrical Engineer,5
+30,Electrical Engineer,5
+1,Petroleum Engineer,5
+7,Petroleum Engineer,5
+19,Petroleum Engineer,5
+22,Petroleum Engineer,5
+25,Petroleum Engineer,5
+30,Petroleum Engineer,5
+1,Architect,5
+7,Architect,5
+19,Architect,5
+22,Architect,5
+25,Architect,5
+30,Architect,5

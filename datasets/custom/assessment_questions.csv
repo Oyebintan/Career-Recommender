@@ -1,0 +1,36 @@
+question_id,question,category
+1,How much do you enjoy solving mathematical problems?,Interest
+2,How much do you enjoy coding and programming?,Interest
+3,How much do you enjoy designing graphics or interfaces?,Interest
+4,How much do you enjoy writing articles or reports?,Interest
+5,How much do you enjoy public speaking?,Interest
+6,How much do you enjoy helping people solve problems?,Interest
+7,How much do you enjoy scientific experiments?,Interest
+8,How much do you enjoy managing people and projects?,Interest
+9,How much do you enjoy researching information?,Interest
+10,How much do you enjoy analyzing data?,Interest
+11,How much do you enjoy learning new technologies?,Technology
+12,How much do you enjoy working with computers?,Technology
+13,How much do you enjoy working with software tools?,Technology
+14,How much do you enjoy building websites or apps?,Technology
+15,How much do you enjoy working with financial records?,Business
+16,How much do you enjoy studying laws and regulations?,Law
+17,How much do you enjoy creating media content?,Mass Communication
+18,How much do you enjoy working in healthcare environments?,Health Science
+19,How much do you enjoy building physical structures?,Engineering
+20,How much do you enjoy teamwork?,Personality
+21,How much do you enjoy working independently?,Personality
+22,How much do you enjoy critical thinking and problem solving?,Personality
+23,How comfortable are you with deadlines and time pressure?,Work Style
+24,How comfortable are you with speaking to large audiences?,Work Style
+25,How comfortable are you with detailed and careful tasks?,Work Style
+26,How much do you enjoy using spreadsheets and numbers?,Business
+27,How much do you enjoy reading and interpreting documents?,Law
+28,How much do you enjoy creating content for social media?,Mass Communication
+29,How much do you enjoy coding solutions to real-world problems?,Technology
+30,How much do you enjoy laboratory or practical work?,Science
+31,How much do you enjoy planning and organizing tasks?,Management
+32,How much do you enjoy helping clients or customers?,Service
+33,How much do you enjoy making presentations?,Communication
+34,How much do you enjoy working with data visualizations?,Technology
+35,How much do you enjoy learning about business strategy?,Business

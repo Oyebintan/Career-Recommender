@@ -1,0 +1,381 @@
+career_name,skill
+Software Engineer,Python
+Software Engineer,Java
+Software Engineer,C++
+Software Engineer,Git
+Software Engineer,SQL
+Software Engineer,Algorithms
+Software Engineer,Problem Solving
+Software Engineer,System Design
+Software Engineer,Testing
+Software Engineer,Debugging
+Web Developer,HTML
+Web Developer,CSS
+Web Developer,JavaScript
+Web Developer,React
+Web Developer,Bootstrap
+Web Developer,Git
+Web Developer,Responsive Design
+Web Developer,API Integration
+Web Developer,Debugging
+Web Developer,Version Control
+Mobile App Developer,Flutter
+Mobile App Developer,Dart
+Mobile App Developer,Kotlin
+Mobile App Developer,Java
+Mobile App Developer,API Integration
+Mobile App Developer,Git
+Mobile App Developer,Mobile UI Design
+Mobile App Developer,Debugging
+Mobile App Developer,State Management
+Data Scientist,Python
+Data Scientist,Statistics
+Data Scientist,Machine Learning
+Data Scientist,SQL
+Data Scientist,Pandas
+Data Scientist,NumPy
+Data Scientist,Data Visualization
+Data Scientist,Model Evaluation
+Data Scientist,Data Cleaning
+Data Scientist,Research
+Data Analyst,Excel
+Data Analyst,SQL
+Data Analyst,Power BI
+Data Analyst,Tableau
+Data Analyst,Data Cleaning
+Data Analyst,Data Visualization
+Data Analyst,Reporting
+Data Analyst,Business Analysis
+Data Analyst,Statistics
+Machine Learning Engineer,Python
+Machine Learning Engineer,Machine Learning
+Machine Learning Engineer,Deep Learning
+Machine Learning Engineer,SQL
+Machine Learning Engineer,Model Deployment
+Machine Learning Engineer,TensorFlow
+Machine Learning Engineer,PyTorch
+Machine Learning Engineer,Feature Engineering
+Machine Learning Engineer,MLOps
+Cybersecurity Analyst,Network Security
+Cybersecurity Analyst,Ethical Hacking
+Cybersecurity Analyst,Risk Assessment
+Cybersecurity Analyst,Incident Response
+Cybersecurity Analyst,Linux
+Cybersecurity Analyst,Firewalls
+Cybersecurity Analyst,Threat Analysis
+Cybersecurity Analyst,Vulnerability Assessment
+Cybersecurity Analyst,Cryptography
+Network Engineer,Networking
+Network Engineer,Routing
+Network Engineer,Switching
+Network Engineer,TCP/IP
+Network Engineer,Network Security
+Network Engineer,Cisco
+Network Engineer,Troubleshooting
+Network Engineer,Firewall Configuration
+Network Engineer,System Administration
+Cloud Engineer,AWS
+Cloud Engineer,Azure
+Cloud Engineer,Cloud Architecture
+Cloud Engineer,Linux
+Cloud Engineer,Docker
+Cloud Engineer,Kubernetes
+Cloud Engineer,Infrastructure as Code
+Cloud Engineer,Networking
+Cloud Engineer,Automation
+DevOps Engineer,Linux
+DevOps Engineer,Docker
+DevOps Engineer,Kubernetes
+DevOps Engineer,CI/CD
+DevOps Engineer,Git
+DevOps Engineer,Scripting
+DevOps Engineer,Cloud Platforms
+DevOps Engineer,Monitoring
+DevOps Engineer,Automation
+Database Administrator,SQL
+Database Administrator,Database Design
+Database Administrator,Backup and Recovery
+Database Administrator,Performance Tuning
+Database Administrator,Data Modeling
+Database Administrator,Security
+Database Administrator,Replication
+Database Administrator,Troubleshooting
+Database Administrator,PostgreSQL
+UI/UX Designer,Figma
+UI/UX Designer,Wireframing
+UI/UX Designer,Prototyping
+UI/UX Designer,User Research
+UI/UX Designer,Visual Design
+UI/UX Designer,Information Architecture
+UI/UX Designer,Usability Testing
+UI/UX Designer,Adobe XD
+UI/UX Designer,Interaction Design
+Product Manager,Product Strategy
+Product Manager,Roadmapping
+Product Manager,Communication
+Product Manager,Market Research
+Product Manager,Agile
+Product Manager,Leadership
+Product Manager,Problem Solving
+Product Manager,Stakeholder Management
+Product Manager,Analytics
+Accountant,Bookkeeping
+Accountant,Financial Reporting
+Accountant,Microsoft Excel
+Accountant,Taxation
+Accountant,Budgeting
+Accountant,Auditing Basics
+Accountant,Accounting Software
+Accountant,Attention to Detail
+Accountant,Financial Analysis
+Auditor,Auditing
+Auditor,Risk Analysis
+Auditor,Financial Reporting
+Auditor,Compliance
+Auditor,Internal Controls
+Auditor,Attention to Detail
+Auditor,Documentation
+Auditor,Accounting Principles
+Auditor,Fraud Detection
+Financial Analyst,Financial Modeling
+Financial Analyst,Excel
+Financial Analyst,Forecasting
+Financial Analyst,Investment Analysis
+Financial Analyst,Data Analysis
+Financial Analyst,Budgeting
+Financial Analyst,Reporting
+Financial Analyst,Valuation
+Financial Analyst,Presentation
+Tax Consultant,Taxation
+Tax Consultant,Tax Planning
+Tax Consultant,Compliance
+Tax Consultant,Research
+Tax Consultant,Accounting Principles
+Tax Consultant,Financial Reporting
+Tax Consultant,Attention to Detail
+Tax Consultant,Client Advisory
+Tax Consultant,Regulatory Knowledge
+Banker,Customer Service
+Banker,Financial Products
+Banker,Risk Management
+Banker,Sales
+Banker,Communication
+Banker,Credit Analysis
+Banker,Compliance
+Banker,Relationship Management
+Banker,Cash Handling
+Business Analyst,Requirements Gathering
+Business Analyst,Data Analysis
+Business Analyst,SQL
+Business Analyst,Business Process Mapping
+Business Analyst,Documentation
+Business Analyst,Stakeholder Management
+Business Analyst,Problem Solving
+Business Analyst,Excel
+Business Analyst,Presentation
+Management Consultant,Strategy
+Management Consultant,Presentation
+Management Consultant,Research
+Management Consultant,Problem Solving
+Management Consultant,Communication
+Management Consultant,Business Analysis
+Management Consultant,Project Management
+Management Consultant,Stakeholder Management
+Management Consultant,Excel
+Lawyer,Legal Writing
+Lawyer,Negotiation
+Lawyer,Research
+Lawyer,Public Speaking
+Lawyer,Critical Thinking
+Lawyer,Case Analysis
+Lawyer,Drafting
+Lawyer,Advocacy
+Lawyer,Communication
+Corporate Lawyer,Contract Drafting
+Corporate Lawyer,Negotiation
+Corporate Lawyer,Legal Compliance
+Corporate Lawyer,Research
+Corporate Lawyer,Corporate Law
+Corporate Lawyer,Communication
+Corporate Lawyer,Risk Assessment
+Corporate Lawyer,Attention to Detail
+Corporate Lawyer,Documentation
+Legal Adviser,Legal Research
+Legal Adviser,Drafting
+Legal Adviser,Compliance
+Legal Adviser,Communication
+Legal Adviser,Negotiation
+Legal Adviser,Critical Thinking
+Legal Adviser,Policy Review
+Legal Adviser,Contract Review
+Legal Adviser,Documentation
+Compliance Officer,Regulatory Knowledge
+Compliance Officer,Risk Assessment
+Compliance Officer,Audit
+Compliance Officer,Documentation
+Compliance Officer,Attention to Detail
+Compliance Officer,Policy Enforcement
+Compliance Officer,Communication
+Compliance Officer,Monitoring
+Compliance Officer,Reporting
+Legal Researcher,Research
+Legal Researcher,Legal Writing
+Legal Researcher,Analysis
+Legal Researcher,Case Law Review
+Legal Researcher,Critical Thinking
+Legal Researcher,Documentation
+Legal Researcher,Reading Comprehension
+Legal Researcher,Citation
+Legal Researcher,Attention to Detail
+Journalist,Writing
+Journalist,Interviewing
+Journalist,Research
+Journalist,News Reporting
+Journalist,Editing
+Journalist,Critical Thinking
+Journalist,Fact Checking
+Journalist,Storytelling
+Journalist,Communication
+Public Relations Officer,Communication
+Public Relations Officer,Public Speaking
+Public Relations Officer,Media Relations
+Public Relations Officer,Crisis Management
+Public Relations Officer,Writing
+Public Relations Officer,Brand Management
+Public Relations Officer,Event Coordination
+Public Relations Officer,Strategy
+Public Relations Officer,Networking
+Broadcaster,Voice Modulation
+Broadcaster,Public Speaking
+Broadcaster,Script Reading
+Broadcaster,Communication
+Broadcaster,Presentation
+Broadcaster,Research
+Broadcaster,Audience Engagement
+Broadcaster,Storytelling
+Broadcaster,Interviewing
+Content Creator,Content Writing
+Content Creator,Video Editing
+Content Creator,Storytelling
+Content Creator,Social Media
+Content Creator,Creativity
+Content Creator,Graphic Design Basics
+Content Creator,SEO
+Content Creator,Audience Growth
+Content Creator,Consistency
+Digital Marketer,SEO
+Digital Marketer,Content Marketing
+Digital Marketer,Google Analytics
+Digital Marketer,Advertising
+Digital Marketer,Social Media Marketing
+Digital Marketer,Email Marketing
+Digital Marketer,Copywriting
+Digital Marketer,Campaign Management
+Digital Marketer,Analytics
+Social Media Manager,Social Media Marketing
+Social Media Manager,Content Planning
+Social Media Manager,Community Management
+Social Media Manager,Analytics
+Social Media Manager,Brand Voice
+Social Media Manager,Copywriting
+Social Media Manager,Scheduling
+Social Media Manager,Engagement
+Social Media Manager,Creativity
+Copywriter,Copywriting
+Copywriter,Persuasive Writing
+Copywriter,Editing
+Copywriter,Research
+Copywriter,Creativity
+Copywriter,SEO
+Copywriter,Brand Messaging
+Copywriter,Storytelling
+Copywriter,Grammar
+Doctor,Diagnosis
+Doctor,Patient Care
+Doctor,Medical Knowledge
+Doctor,Clinical Skills
+Doctor,Communication
+Doctor,Critical Thinking
+Doctor,Ethics
+Doctor,Record Keeping
+Doctor,Empathy
+Pharmacist,Pharmacology
+Pharmacist,Drug Dispensing
+Pharmacist,Patient Counseling
+Pharmacist,Attention to Detail
+Pharmacist,Regulatory Knowledge
+Pharmacist,Communication
+Pharmacist,Inventory Management
+Pharmacist,Safety
+Nurse,Patient Care
+Nurse,Communication
+Nurse,Clinical Skills
+Nurse,Empathy
+Nurse,Observation
+Nurse,Medication Administration
+Nurse,Teamwork
+Nurse,Record Keeping
+Nurse,First Aid
+Medical Laboratory Scientist,Laboratory Techniques
+Medical Laboratory Scientist,Sample Analysis
+Medical Laboratory Scientist,Microscopy
+Medical Laboratory Scientist,Quality Control
+Medical Laboratory Scientist,Attention to Detail
+Medical Laboratory Scientist,Data Recording
+Medical Laboratory Scientist,Safety
+Medical Laboratory Scientist,Instrumentation
+Medical Laboratory Scientist,Biology
+Biochemist,Biochemistry
+Biochemist,Research
+Biochemist,Laboratory Skills
+Biochemist,Data Analysis
+Biochemist,Critical Thinking
+Biochemist,Experiment Design
+Biochemist,Microscopy
+Biochemist,Documentation
+Biochemist,Statistics
+Civil Engineer,AutoCAD
+Civil Engineer,Structural Design
+Civil Engineer,Project Management
+Civil Engineer,Surveying
+Civil Engineer,Construction Methods
+Civil Engineer,Problem Solving
+Civil Engineer,Mathematics
+Civil Engineer,Blueprint Reading
+Civil Engineer,Materials Science
+Mechanical Engineer,CAD
+Mechanical Engineer,Thermodynamics
+Mechanical Engineer,Mechanics
+Mechanical Engineer,Problem Solving
+Mechanical Engineer,Materials Science
+Mechanical Engineer,Maintenance
+Mechanical Engineer,Design
+Mechanical Engineer,Mathematics
+Mechanical Engineer,Technical Drawing
+Electrical Engineer,Circuit Design
+Electrical Engineer,Power Systems
+Electrical Engineer,Troubleshooting
+Electrical Engineer,Electronics
+Electrical Engineer,Mathematics
+Electrical Engineer,Control Systems
+Electrical Engineer,Communication
+Electrical Engineer,Problem Solving
+Electrical Engineer,Technical Drawing
+Petroleum Engineer,Reservoir Engineering
+Petroleum Engineer,Drilling Operations
+Petroleum Engineer,Data Analysis
+Petroleum Engineer,Geology Basics
+Petroleum Engineer,Problem Solving
+Petroleum Engineer,Project Management
+Petroleum Engineer,Safety
+Petroleum Engineer,Mathematics
+Petroleum Engineer,Reporting
+Architect,Architectural Design
+Architect,AutoCAD
+Architect,Creativity
+Architect,Space Planning
+Architect,Technical Drawing
+Architect,Project Management
+Architect,3D Modeling
+Architect,Building Codes
+Architect,Presentation
