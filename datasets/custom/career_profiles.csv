@@ -1,0 +1,43 @@
+career_id,career_name,domain
+1,Software Engineer,Technology
+2,Web Developer,Technology
+3,Mobile App Developer,Technology
+4,Data Scientist,Technology
+5,Data Analyst,Technology
+6,Machine Learning Engineer,Technology
+7,Cybersecurity Analyst,Technology
+8,Network Engineer,Technology
+9,Cloud Engineer,Technology
+10,DevOps Engineer,Technology
+11,Database Administrator,Technology
+12,UI/UX Designer,Technology
+13,Product Manager,Technology
+14,Accountant,Business
+15,Auditor,Business
+16,Financial Analyst,Business
+17,Tax Consultant,Business
+18,Banker,Business
+19,Business Analyst,Business
+20,Management Consultant,Business
+21,Lawyer,Law
+22,Corporate Lawyer,Law
+23,Legal Adviser,Law
+24,Compliance Officer,Law
+25,Legal Researcher,Law
+26,Journalist,Mass Communication
+27,Public Relations Officer,Mass Communication
+28,Broadcaster,Mass Communication
+29,Content Creator,Mass Communication
+30,Digital Marketer,Mass Communication
+31,Social Media Manager,Mass Communication
+32,Copywriter,Mass Communication
+33,Doctor,Health Science
+34,Pharmacist,Health Science
+35,Nurse,Health Science
+36,Medical Laboratory Scientist,Health Science
+37,Biochemist,Health Science
+38,Civil Engineer,Engineering
+39,Mechanical Engineer,Engineering
+40,Electrical Engineer,Engineering
+41,Petroleum Engineer,Engineering
+42,Architect,Engineering

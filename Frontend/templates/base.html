@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CareerRecommender{% endblock %}</title>
+
+  <!-- Preconnect for speed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+  <!-- Apply saved theme before paint to prevent flash -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('cp-theme') ||
+        (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────────── -->
+<nav class="navbar navbar-expand-lg fixed-top cp-nav">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('auth.landing') }}">
+      <i class="fa-solid fa-compass-drafting me-2"></i>CareerRecommender
+    </a>
+
+    <div class="d-flex align-items-center gap-2 order-lg-last">
+      <!-- Theme toggle -->
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+        <span id="themeText">Dark</span>
+      </button>
+      <!-- Hamburger -->
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMenu"
+              aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1 py-2 py-lg-0 me-3">
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">
+              <i class="fa-solid fa-gauge me-1"></i>Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('assessment.assessment') }}">
+              <i class="fa-solid fa-clipboard-list me-1"></i>Take Assessment
+            </a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn-outline-primary-cp" style="padding:.45rem 1.2rem;font-size:.88rem;"
+               href="{{ url_for('auth.logout') }}">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn-primary-grad" style="padding:.48rem 1.3rem;font-size:.88rem;"
+               href="{{ url_for('auth.register') }}">
+              Get Started
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Flash Messages ───────────────────────────────────────────────── -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container" id="flashContainer">
+      {% for category, message in messages %}
+        <div class="flash-msg {{ category }}" role="alert">
+          {% if category == 'success' %}<i class="fa-solid fa-circle-check"></i>
+          {% elif category == 'error'  %}<i class="fa-solid fa-circle-exclamation"></i>
+          {% else %}                     <i class="fa-solid fa-circle-info"></i>
+          {% endif %}
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ── Main Content ─────────────────────────────────────────────────── -->
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<!-- ── Footer ───────────────────────────────────────────────────────── -->
+{% block footer %}
+<footer class="cp-footer">
+  <div class="container">
+    <p>
+      &copy; {{ 2026 }} <strong>CareerRecommender</strong> &dash;
+      Helping you find your path ✨
+    </p>
+  </div>
+</footer>
+{% endblock %}
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Main JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

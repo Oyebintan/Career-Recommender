@@ -1,0 +1,43 @@
+career_name,description,salary_range,education_requirement
+Software Engineer,"Designs, develops and maintains software applications and systems.",High,BSc Computer Science
+Web Developer,Builds and maintains websites and web applications.,Medium-High,Computer Science or related field
+Mobile App Developer,Develops applications for Android and iOS platforms.,High,Computer Science or related field
+Data Scientist,"Uses data, statistics and machine learning to solve problems.",High,"Computer Science, Statistics or Data Science"
+Data Analyst,"Collects, cleans and analyzes data for decision making.",Medium-High,"Statistics, Computer Science or related field"
+Machine Learning Engineer,Builds and deploys machine learning systems.,High,Computer Science or AI-related degree
+Cybersecurity Analyst,Protects systems and networks from cyber threats.,High,Cybersecurity or Computer Science
+Network Engineer,Designs and manages computer networks.,Medium-High,Computer Science or Networking
+Cloud Engineer,Manages cloud infrastructure and services.,High,Computer Science or related field
+DevOps Engineer,Automates software deployment and infrastructure processes.,High,Computer Science or Software Engineering
+Database Administrator,Manages organizational databases and ensures data integrity.,Medium-High,Computer Science or Information Systems
+UI/UX Designer,Designs user-friendly digital products and interfaces.,Medium-High,"Design, Computer Science or related field"
+Product Manager,"Oversees product strategy, development and delivery.",High,Any degree with business/technology knowledge
+Accountant,Prepares and analyzes financial records and reports.,Medium,Accounting
+Auditor,Examines financial records to ensure compliance and accuracy.,Medium,Accounting
+Financial Analyst,Analyzes financial data and investment opportunities.,High,"Finance, Economics or Accounting"
+Tax Consultant,Provides tax planning and compliance advice.,Medium-High,Accounting or Taxation
+Banker,Provides financial services and manages customer accounts.,Medium,"Banking, Finance or Economics"
+Business Analyst,Analyzes business processes and recommends improvements.,Medium-High,Business Administration or related field
+Management Consultant,Advises organizations on business strategy and performance.,High,Business Administration or related field
+Lawyer,Represents clients and provides legal advice.,High,LLB and Law School
+Corporate Lawyer,Specializes in corporate legal matters and contracts.,High,LLB and Law School
+Legal Adviser,Provides legal guidance to organizations.,Medium-High,LLB and Law School
+Compliance Officer,Ensures organizations comply with regulations and policies.,Medium-High,"Law, Business or related field"
+Legal Researcher,Conducts legal research and prepares legal documentation.,Medium,Law
+Journalist,Researches and reports news and current events.,Medium,Mass Communication or Journalism
+Public Relations Officer,Manages public image and media communications.,Medium,Mass Communication or Public Relations
+Broadcaster,"Presents news, programs and media content.",Medium,Mass Communication
+Content Creator,Creates digital content for online audiences.,Variable,Any relevant field
+Digital Marketer,Promotes products and services through digital channels.,Medium-High,Marketing or related field
+Social Media Manager,Manages social media presence and engagement.,Medium,"Marketing, Mass Communication or related field"
+Copywriter,Writes persuasive content for advertising and marketing.,Medium,"Mass Communication, English or related field"
+Doctor,Diagnoses and treats illnesses and injuries.,High,MBBS
+Pharmacist,Dispenses medications and advises patients on usage.,High,Pharmacy
+Nurse,Provides direct patient care and support.,Medium-High,Nursing
+Medical Laboratory Scientist,Performs laboratory tests for diagnosis and research.,Medium-High,Medical Laboratory Science
+Biochemist,Studies chemical processes within living organisms.,Medium-High,Biochemistry
+Civil Engineer,Designs and supervises construction projects.,High,Civil Engineering
+Mechanical Engineer,Designs mechanical systems and machines.,High,Mechanical Engineering
+Electrical Engineer,Designs and maintains electrical systems.,High,Electrical Engineering
+Petroleum Engineer,Develops methods for oil and gas extraction.,High,Petroleum Engineering
+Architect,Designs buildings and physical structures.,High,Architecture
