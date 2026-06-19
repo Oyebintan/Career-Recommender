@@ -1,5 +1,5 @@
 /* ================================================================
-   CareerRecommender  —  main.css
+   CareerPath AI  —  main.css
    Design: Gen-Z aesthetic · Glassmorphism · Light + Dark Mode
 ================================================================ */
 
@@ -8,6 +8,7 @@
 
 /* ── CSS Variables ─────────────────────────────────────────────── */
 :root {
+  /* Colors */
   --bg:            #f4f4ff;
   --surface:       #ffffff;
   --surface-2:     #eeeeff;
@@ -104,6 +105,7 @@ a:hover { color: var(--primary-light); }
 
 img { max-width: 100%; display: block; }
 
+/* ── Scrollbar ──────────────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
@@ -143,6 +145,7 @@ img { max-width: 100%; display: block; }
   background: rgba(108,99,255,.08);
 }
 
+/* Theme toggle */
 .theme-toggle {
   background: var(--surface-2);
   border: 1.5px solid var(--border);
@@ -533,6 +536,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: .5px;
 }
 
+/* Hero visual */
 .hero-visual {
   position: relative;
   display: flex;
@@ -709,6 +713,7 @@ img { max-width: 100%; display: block; }
 ================================================================ */
 .assessment-wrap { padding-top: 5.5rem; min-height: 100vh; }
 
+/* Category progress steps */
 .cat-steps {
   display: flex;
   justify-content: center;
@@ -738,6 +743,7 @@ img { max-width: 100%; display: block; }
   color: #064e3b;
 }
 
+/* Question card */
 .question-group { display: none; }
 .question-group.active { display: block; }
 
@@ -758,33 +764,55 @@ img { max-width: 100%; display: block; }
   color: var(--text);
 }
 
-.likert-row {
-  display: flex;
-  gap: .5rem;
-  flex-wrap: wrap;
+.q-cat-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--primary);
+  background: rgba(108,99,255,.08);
+  border-radius: 50px;
+  padding: .25rem .7rem;
+  margin-bottom: .85rem;
 }
 
-.likert-option { flex: 1; min-width: 80px; }
+/* CSS Grid instead of flex-wrap: this guarantees exactly 5 equal-width
+   columns on every screen size, so the buttons never wrap into an
+   uneven 3-then-2 layout the way flex-wrap was doing. */
+.likert-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .5rem;
+}
+
+.likert-option { min-width: 0; }
 .likert-option input[type="radio"] { display: none; }
 
 .likert-label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: .3rem;
-  padding: .6rem .3rem;
+  height: 100%;
+  min-height: 64px;
+  padding: .55rem .2rem;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition);
   text-align: center;
-  font-size: .72rem;
+  font-size: .7rem;
   font-weight: 500;
   color: var(--text-sub);
   background: var(--surface-2);
   user-select: none;
 }
-.likert-emoji { font-size: 1.4rem; }
+.likert-emoji { font-size: 1.35rem; line-height: 1; }
+.likert-text  { line-height: 1.15; }
 .likert-option input:checked + .likert-label {
   border-color: var(--primary);
   background: rgba(108,99,255,.1);
@@ -793,6 +821,7 @@ img { max-width: 100%; display: block; }
 }
 .likert-option input:checked + .likert-label .likert-emoji { transform: scale(1.15); }
 
+/* Assessment nav buttons */
 .assessment-nav {
   display: flex;
   justify-content: space-between;

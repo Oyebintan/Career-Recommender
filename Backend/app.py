@@ -63,13 +63,5 @@ def load_user(user_id):
 import os
 
 if __name__ == "__main__":
-    # Check if we are running on Hugging Face or another cloud platform
-    # Hugging Face sets a PORT environment variable automatically (usually 7860)
-    port = int(os.environ.get("PORT", 7860))
-    
-    # In production, turn debug OFF and bind to 0.0.0.0 so external traffic can connect
-    if os.environ.get("PORT"):
-        app.run(host="0.0.0.0", port=port, debug=False)
-    else:
-        # This keeps your exact current local setup working perfectly when you test on your PC
-        app.run(debug=app.config.get("DEBUG", True))
+    # Strictly bind to Hugging Face's required network interface
+    app.run(host="0.0.0.0", port=7860, debug=False)

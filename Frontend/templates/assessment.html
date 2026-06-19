@@ -1,98 +1,98 @@
 {% extends "base.html" %}
-{% block title %}Career Assessment — CareerRecommender{% endblock %}
+{% block title %}Career Assessment — CareerPath AI{% endblock %}
 
 {% block content %}
+{% set groups = questions|batch(5)|list %}
+
 <div class="assessment-wrap">
   <div class="container">
 
     <div class="text-center" style="padding-top:1rem;">
       <div class="cp-badge mx-auto mb-2"><i class="fa-solid fa-clipboard-question"></i> Step 2 of 2</div>
       <h2 style="font-size:1.9rem;font-weight:800;">Career Assessment</h2>
-      <p style="color:var(--text-sub);font-size:.9rem;" id="progressText">Step 1 of {{ categories|length }}</p>
+      <p style="color:var(--text-sub);font-size:.9rem;" id="progressText">Step 1 of {{ groups|length }}</p>
+      <p style="color:var(--text-muted);font-size:.78rem;">
+        <i class="fa-regular fa-clock"></i> Takes about 5–7 minutes &middot; {{ questions|length }} quick questions
+      </p>
     </div>
 
     <!-- Overall progress bar -->
-    <div class="cp-progress-wrap mb-3" style="max-width:600px;margin-left:auto;margin-right:auto;">
+    <div class="cp-progress-wrap mb-3" style="max-width:500px;margin-left:auto;margin-right:auto;">
       <div class="cp-progress-fill" id="assessmentProgress" style="width:0%"></div>
     </div>
 
-    <!-- Category pills -->
+    <!-- Step dots -->
     <div class="cat-steps">
-      {% for cat in categories %}
-        <span class="cat-step{% if loop.first %} active{% endif %}">{{ cat }}</span>
+      {% for group in groups %}
+        <span class="cat-step{% if loop.first %} active{% endif %}">Step {{ loop.index }}</span>
       {% endfor %}
     </div>
 
     <form id="assessmentForm" method="POST" action="{{ url_for('assessment.submit') }}">
-      <div style="max-width:700px;margin:0 auto;">
+      <div style="max-width:640px;margin:0 auto;">
 
-        {% for cat in categories %}
-          <div class="question-group{% if loop.first %} active{% endif %}" data-category="{{ cat }}">
+        {% for group in groups %}
+          <div class="question-group{% if loop.first %} active{% endif %}">
 
-            <div class="cat-header">
-              <div class="cat-icon">
-                {% if cat == 'Interest' %}❤️
-                {% elif cat == 'Technology' %}💻
-                {% elif cat == 'Business' %}💼
-                {% elif cat == 'Law' %}⚖️
-                {% elif cat == 'Mass Communication' %}📣
-                {% elif cat == 'Health Science' %}🩺
-                {% elif cat == 'Engineering' %}🛠️
-                {% elif cat == 'Personality' %}🧬
-                {% elif cat == 'Work Style' %}⏱️
-                {% elif cat == 'Science' %}🔬
-                {% elif cat == 'Management' %}📋
-                {% elif cat == 'Service' %}🤝
-                {% elif cat == 'Communication' %}🗣️
-                {% else %}✨
-                {% endif %}
-              </div>
-              <div>
-                <div class="cat-title">{{ cat }}</div>
-                <div class="cat-count">
-                  {{ questions|selectattr('category', 'equalto', cat)|list|length }} question(s)
+            {% for q in group %}
+              <div class="q-card">
+                <div class="q-cat-tag">
+                  {% if q.category == 'Interest' %}❤️
+                  {% elif q.category == 'Technology' %}💻
+                  {% elif q.category == 'Business' %}💼
+                  {% elif q.category == 'Law' %}⚖️
+                  {% elif q.category == 'Mass Communication' %}📣
+                  {% elif q.category == 'Health Science' %}🩺
+                  {% elif q.category == 'Engineering' %}🛠️
+                  {% elif q.category == 'Personality' %}🧬
+                  {% elif q.category == 'Work Style' %}⏱️
+                  {% elif q.category == 'Science' %}🔬
+                  {% elif q.category == 'Management' %}📋
+                  {% elif q.category == 'Service' %}🤝
+                  {% elif q.category == 'Communication' %}🗣️
+                  {% else %}✨
+                  {% endif %}
+                  {{ q.category }}
                 </div>
-              </div>
-            </div>
-
-            {% for q in questions %}
-              {% if q.category == cat %}
-                <div class="q-card">
-                  <div class="q-text">{{ q.question }}</div>
-                  <div class="likert-row">
-                    <div class="likert-option">
-                      <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_1" value="1" required>
-                      <label class="likert-label" for="q{{ q.question_id }}_1">
-                        <span class="likert-emoji">😣</span> Strongly<br>Disagree
-                      </label>
-                    </div>
-                    <div class="likert-option">
-                      <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_2" value="2">
-                      <label class="likert-label" for="q{{ q.question_id }}_2">
-                        <span class="likert-emoji">🙁</span> Disagree
-                      </label>
-                    </div>
-                    <div class="likert-option">
-                      <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_3" value="3">
-                      <label class="likert-label" for="q{{ q.question_id }}_3">
-                        <span class="likert-emoji">😐</span> Neutral
-                      </label>
-                    </div>
-                    <div class="likert-option">
-                      <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_4" value="4">
-                      <label class="likert-label" for="q{{ q.question_id }}_4">
-                        <span class="likert-emoji">🙂</span> Agree
-                      </label>
-                    </div>
-                    <div class="likert-option">
-                      <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_5" value="5">
-                      <label class="likert-label" for="q{{ q.question_id }}_5">
-                        <span class="likert-emoji">🤩</span> Strongly<br>Agree
-                      </label>
-                    </div>
+                <div class="q-text">{{ q.question }}</div>
+                <div class="likert-row">
+                  <div class="likert-option">
+                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_1" value="1" required>
+                    <label class="likert-label" for="q{{ q.question_id }}_1" aria-label="Strongly Disagree">
+                      <span class="likert-emoji">😣</span>
+                      <span class="likert-text">Strongly<br>Disagree</span>
+                    </label>
+                  </div>
+                  <div class="likert-option">
+                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_2" value="2">
+                    <label class="likert-label" for="q{{ q.question_id }}_2" aria-label="Disagree">
+                      <span class="likert-emoji">🙁</span>
+                      <span class="likert-text">Disagree</span>
+                    </label>
+                  </div>
+                  <div class="likert-option">
+                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_3" value="3">
+                    <label class="likert-label" for="q{{ q.question_id }}_3" aria-label="Neutral">
+                      <span class="likert-emoji">😐</span>
+                      <span class="likert-text">Neutral</span>
+                    </label>
+                  </div>
+                  <div class="likert-option">
+                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_4" value="4">
+                    <label class="likert-label" for="q{{ q.question_id }}_4" aria-label="Agree">
+                      <span class="likert-emoji">🙂</span>
+                      <span class="likert-text">Agree</span>
+                    </label>
+                  </div>
+                  <div class="likert-option">
+                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_5" value="5">
+                    <label class="likert-label" for="q{{ q.question_id }}_5" aria-label="Strongly Agree">
+                      <span class="likert-emoji">🤩</span>
+                      <span class="likert-text">Strongly<br>Agree</span>
+                    </label>
                   </div>
                 </div>
-              {% endif %}
+              </div>
             {% endfor %}
 
           </div>
@@ -121,3 +121,5 @@
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/assessment.js') }}"></script>
 {% endblock %}
+EOF
+echo "assessment.html rewritten"
