@@ -21,8 +21,20 @@ _engine = RecommendationService()
 @login_required
 def assessment():
     questions_df = _loader.load_assessment_questions()
+    questions    = questions_df.to_dict(orient="records")
 
-    questions  = questions_df.to_dict(orient="records")
+    # Defensive guard: if the dataset ever comes back empty (a hosting
+    # path hiccup, a corrupted CSV, etc.) show a clear message instead
+    # of silently rendering a broken "Step 1 of 0" page with a dead
+    # Next button.
+    if not questions:
+        flash(
+            "We couldn't load the assessment questions right now. "
+            "Please try again in a moment.",
+            "error",
+        )
+        return redirect(url_for("dashboard.dashboard"))
+
     categories = questions_df["category"].unique().tolist()
 
     return render_template(

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Your Career Matches — CareerRecommender{% endblock %}
+{% block title %}Your Career Matches — CareerPath AI{% endblock %}
 
 {% block content %}
 <div class="results-wrap">
@@ -13,10 +13,10 @@
       </p>
     </div>
 
-    <div class="row g-4 mb-5">
+    <div class="row g-4 mb-5 align-items-stretch">
       {% for career in career_cards %}
-        <div class="col-md-6 col-lg-4">
-          <div class="rank-card rank-{{ career.rank }}">
+        <div class="col-md-6 col-lg-4 d-flex">
+          <div class="rank-card rank-{{ career.rank }} d-flex flex-column w-100">
             <div class="rank-card-header">
               <div class="rank-medal">
                 {% if career.rank == 1 %}🥇{% elif career.rank == 2 %}🥈{% else %}🥉{% endif %}
@@ -26,7 +26,7 @@
                 <div class="rank-card-domain">Rank #{{ career.rank }} Match</div>
               </div>
             </div>
-            <div class="rank-card-body">
+            <div class="rank-card-body d-flex flex-column flex-grow-1">
               <div class="match-score-big">{{ career.score }}%</div>
               <div class="match-label mb-3">Match Score</div>
 
@@ -43,7 +43,7 @@
                 <span>{{ career.description }}</span>
               </div>
 
-              <div class="d-grid gap-2 mt-3">
+              <div class="d-grid gap-2 mt-auto pt-3">
                 <a href="{{ url_for('recommendation.career_detail', career_name=career.career_name) }}"
                    class="btn-outline-primary-cp justify-content-center">
                   <i class="fa-solid fa-circle-info"></i> View Details

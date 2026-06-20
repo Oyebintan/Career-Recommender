@@ -711,7 +711,7 @@ img { max-width: 100%; display: block; }
 /* ================================================================
    ASSESSMENT PAGE
 ================================================================ */
-.assessment-wrap { padding-top: 5.5rem; min-height: 100vh; }
+.assessment-wrap { padding: 6.5rem 0 4rem; min-height: 100vh; }
 
 /* Category progress steps */
 .cat-steps {
