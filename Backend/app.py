@@ -102,7 +102,7 @@ if app.config.get("GOOGLE_CLIENT_ID"):
         )
 
     # Register blueprints
-    app.register_blueprint(auth_bp)
+app.register_blueprint(auth_bp)
 app.register_blueprint(profile_bp)
 app.register_blueprint(assessment_bp)
 app.register_blueprint(recommendation_bp)
