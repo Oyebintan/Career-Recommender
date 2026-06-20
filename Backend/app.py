@@ -22,12 +22,60 @@ def create_app():
         static_folder=os.path.join(base_dir, "..", "Frontend", "static"),
         static_url_path="/static",
     )
-    app = Flask(__name__)
 
-app = Flask(__name__)
+    # --- NEW HTTPS ENFORCER ---
+    class ForceHTTPS(object):
+        def __init__(self, app):
+            self.app = app
 
-# --- NEW HTTPS ENFORCER ---
-class ForceHTTPS(object):
+        def __call__(self, environ, start_response):
+            # Violently force Flask to recognize the connection as secure
+            environ['wsgi.url_scheme'] = 'https'
+            return self.app(environ, start_response)
+
+    app.wsgi_app = ForceHTTPS(app.wsgi_app)
+
+    app.config.from_object(Config)
+
+    # Init extensions
+    db.init_app(app)
+    login_manager.init_app(app)
+    oauth.init_app(app)
+
+    # Register Google OAuth provider (only when credentials are present)
+    if app.config.get("GOOGLE_CLIENT_ID"):
+        oauth.register(
+            name="google",
+            client_id=app.config["GOOGLE_CLIENT_ID"],
+            client_secret=app.config["GOOGLE_CLIENT_SECRET"],
+            server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
+            client_kwargs={"scope": "openid email profile"},
+        )
+
+    # Register blueprints
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(profile_bp)
+    app.register_blueprint(assessment_bp)
+    app.register_blueprint(recommendation_bp)
+    app.register_blueprint(dashboard_bp)
+
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+app = create_app()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+if __name__ == "__main__":
+    # Strictly bind to Hugging Face's required network interface
+    app.run(host="0.0.0.0", port=7860, debug=False)
+
     def __init__(self, app):
         self.app = app
 
@@ -39,7 +87,7 @@ class ForceHTTPS(object):
 app.wsgi_app = ForceHTTPS(app.wsgi_app)
 # --------------------------
 
-    app.config.from_object(Config)
+app.config.from_object(Config)
 
     # Init extensions
     db.init_app(app)
