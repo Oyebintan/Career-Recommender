@@ -111,7 +111,7 @@ app.register_blueprint(dashboard_bp)
 with app.app_context():
         db.create_all()
 
-    return app
+        return app
 
 
 app = create_app()
