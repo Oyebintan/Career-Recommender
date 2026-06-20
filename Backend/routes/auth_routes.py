@@ -97,8 +97,10 @@ def google_login():
     if not current_app.config.get("GOOGLE_CLIENT_ID"):
         flash("Google login is not configured.", "error")
         return redirect(url_for("auth.login"))
-    redirect_uri = url_for("auth.google_callback", _external=True)
+    
+    redirect_uri = "https://lammyde-career-recommender.hf.space/auth/google/callback"
     print("GOOGLE CALLBACK URI:", redirect_uri)
+    
     return oauth.google.authorize_redirect(redirect_uri)
 
 

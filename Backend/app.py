@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, app
 from config import Config
 from extensions import db, login_manager, oauth
 
@@ -22,6 +22,23 @@ def create_app():
         static_folder=os.path.join(base_dir, "..", "Frontend", "static"),
         static_url_path="/static",
     )
+    app = Flask(__name__)
+
+app = Flask(__name__)
+
+# --- NEW HTTPS ENFORCER ---
+class ForceHTTPS(object):
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        # Violently force Flask to recognize the connection as secure
+        environ['wsgi.url_scheme'] = 'https'
+        return self.app(environ, start_response)
+
+app.wsgi_app = ForceHTTPS(app.wsgi_app)
+# --------------------------
+
     app.config.from_object(Config)
 
     # Init extensions
