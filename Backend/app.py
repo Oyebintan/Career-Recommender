@@ -1,5 +1,5 @@
 import os
-from flask import Flask, app
+from flask import Flask
 from config import Config
 from extensions import db, login_manager, oauth
 
@@ -76,9 +76,6 @@ if __name__ == "__main__":
     # Strictly bind to Hugging Face's required network interface
     app.run(host="0.0.0.0", port=7860, debug=False)
 
-    def __init__(self, app):
-        self.app = app
-
     def __call__(self, environ, start_response):
         # Violently force Flask to recognize the connection as secure
         environ['wsgi.url_scheme'] = 'https'
@@ -90,12 +87,12 @@ app.wsgi_app = ForceHTTPS(app.wsgi_app)
 app.config.from_object(Config)
 
     # Init extensions
-    db.init_app(app)
-    login_manager.init_app(app)
-    oauth.init_app(app)
+db.init_app(app)
+login_manager.init_app(app)
+oauth.init_app(app)
 
     # Register Google OAuth provider (only when credentials are present)
-    if app.config.get("GOOGLE_CLIENT_ID"):
+if app.config.get("GOOGLE_CLIENT_ID"):
         oauth.register(
             name="google",
             client_id=app.config["GOOGLE_CLIENT_ID"],
@@ -106,12 +103,12 @@ app.config.from_object(Config)
 
     # Register blueprints
     app.register_blueprint(auth_bp)
-    app.register_blueprint(profile_bp)
-    app.register_blueprint(assessment_bp)
-    app.register_blueprint(recommendation_bp)
-    app.register_blueprint(dashboard_bp)
+app.register_blueprint(profile_bp)
+app.register_blueprint(assessment_bp)
+app.register_blueprint(recommendation_bp)
+app.register_blueprint(dashboard_bp)
 
-    with app.app_context():
+with app.app_context():
         db.create_all()
 
     return app
