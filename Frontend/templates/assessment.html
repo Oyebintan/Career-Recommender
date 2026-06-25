@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Career Assessment — CareerPath AI{% endblock %}
+{% block title %}Career Assessment — CareerRecommender{% endblock %}
 
 {% block content %}
-{% set groups = questions|batch(5)|list %}
+{% set pg = questions|batch(5)|list %}
 
 <div class="assessment-wrap">
   <div class="container">
@@ -10,31 +10,28 @@
     <div class="text-center" style="padding-top:1rem;">
       <div class="cp-badge mx-auto mb-2"><i class="fa-solid fa-clipboard-question"></i> Step 2 of 2</div>
       <h2 style="font-size:1.9rem;font-weight:800;">Career Assessment</h2>
-      <p style="color:var(--text-sub);font-size:.9rem;" id="progressText">Step 1 of {{ groups|length }}</p>
+      <p style="color:var(--text-sub);font-size:.9rem;" id="progressText">Step 1 of {{ pg|length }}</p>
       <p style="color:var(--text-muted);font-size:.78rem;">
-        <i class="fa-regular fa-clock"></i> Takes about 5–7 minutes &middot; {{ questions|length }} quick questions
+        <i class="fa-regular fa-clock"></i> About 5–7 minutes &middot; {{ questions|length }} questions
       </p>
     </div>
 
-    <!-- Overall progress bar -->
-    <div class="cp-progress-wrap mb-3" style="max-width:500px;margin-left:auto;margin-right:auto;">
+    <div class="cp-progress-wrap mb-3" style="max-width:500px;margin:0 auto;">
       <div class="cp-progress-fill" id="assessmentProgress" style="width:0%"></div>
     </div>
 
-    <!-- Step dots -->
     <div class="cat-steps">
-      {% for group in groups %}
-        <span class="cat-step{% if loop.first %} active{% endif %}">Step {{ loop.index }}</span>
+      {% for group in pg %}
+        <span class="cat-step{% if loop.first %} active{% endif %}">{{ loop.index }}</span>
       {% endfor %}
     </div>
 
     <form id="assessmentForm" method="POST" action="{{ url_for('assessment.submit') }}">
       <div style="max-width:640px;margin:0 auto;">
 
-        {% for group in groups %}
+        {% for group in pg %}
           <div class="question-group{% if loop.first %} active{% endif %}">
-
-            {% for q in group %}
+            {% for q in group if q %}
               <div class="q-card">
                 <div class="q-cat-tag">
                   {% if q.category == 'Interest' %}❤️
@@ -58,43 +55,37 @@
                 <div class="likert-row">
                   <div class="likert-option">
                     <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_1" value="1" required>
-                    <label class="likert-label" for="q{{ q.question_id }}_1" aria-label="Strongly Disagree">
-                      <span class="likert-emoji">😣</span>
-                      <span class="likert-text">Strongly<br>Disagree</span>
+                    <label class="likert-label" for="q{{ q.question_id }}_1">
+                      <span class="likert-emoji">😣</span><span class="likert-text">Strongly<br>Disagree</span>
                     </label>
                   </div>
                   <div class="likert-option">
                     <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_2" value="2">
-                    <label class="likert-label" for="q{{ q.question_id }}_2" aria-label="Disagree">
-                      <span class="likert-emoji">🙁</span>
-                      <span class="likert-text">Disagree</span>
+                    <label class="likert-label" for="q{{ q.question_id }}_2">
+                      <span class="likert-emoji">🙁</span><span class="likert-text">Disagree</span>
                     </label>
                   </div>
                   <div class="likert-option">
                     <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_3" value="3">
-                    <label class="likert-label" for="q{{ q.question_id }}_3" aria-label="Neutral">
-                      <span class="likert-emoji">😐</span>
-                      <span class="likert-text">Neutral</span>
+                    <label class="likert-label" for="q{{ q.question_id }}_3">
+                      <span class="likert-emoji">😐</span><span class="likert-text">Neutral</span>
                     </label>
                   </div>
                   <div class="likert-option">
                     <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_4" value="4">
-                    <label class="likert-label" for="q{{ q.question_id }}_4" aria-label="Agree">
-                      <span class="likert-emoji">🙂</span>
-                      <span class="likert-text">Agree</span>
+                    <label class="likert-label" for="q{{ q.question_id }}_4">
+                      <span class="likert-emoji">🙂</span><span class="likert-text">Agree</span>
                     </label>
                   </div>
                   <div class="likert-option">
                     <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_5" value="5">
-                    <label class="likert-label" for="q{{ q.question_id }}_5" aria-label="Strongly Agree">
-                      <span class="likert-emoji">🤩</span>
-                      <span class="likert-text">Strongly<br>Agree</span>
+                    <label class="likert-label" for="q{{ q.question_id }}_5">
+                      <span class="likert-emoji">🤩</span><span class="likert-text">Strongly<br>Agree</span>
                     </label>
                   </div>
                 </div>
               </div>
             {% endfor %}
-
           </div>
         {% endfor %}
 
@@ -113,7 +104,6 @@
 
       </div>
     </form>
-
   </div>
 </div>
 {% endblock %}
@@ -121,5 +111,3 @@
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/assessment.js') }}"></script>
 {% endblock %}
-EOF
-echo "assessment.html rewritten"

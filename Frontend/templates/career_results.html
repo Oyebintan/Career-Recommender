@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Your Career Matches — CareerPath AI{% endblock %}
+{% block title %}Your Career Matches — CareerRecommender{% endblock %}
 
 {% block content %}
 <div class="results-wrap">
@@ -8,9 +8,7 @@
     <div class="text-center mb-5">
       <div class="cp-badge mx-auto mb-2"><i class="fa-solid fa-trophy"></i> Your Results</div>
       <h2 style="font-size:2.1rem;font-weight:800;">Your Top 3 Career Matches</h2>
-      <p style="color:var(--text-sub);font-size:.92rem;">
-        Based on your responses, here's what fits you best.
-      </p>
+      <p style="color:var(--text-sub);font-size:.92rem;">Based on your responses, here's what fits you best.</p>
     </div>
 
     <div class="row g-4 mb-5 align-items-stretch">
@@ -29,7 +27,6 @@
             <div class="rank-card-body d-flex flex-column flex-grow-1">
               <div class="match-score-big">{{ career.score }}%</div>
               <div class="match-label mb-3">Match Score</div>
-
               <div class="info-row">
                 <i class="fa-solid fa-sack-dollar"></i>
                 <span><strong>Salary:</strong> {{ career.salary_range }}</span>
@@ -42,7 +39,6 @@
                 <i class="fa-solid fa-align-left"></i>
                 <span>{{ career.description }}</span>
               </div>
-
               <div class="d-grid gap-2 mt-auto pt-3">
                 <a href="{{ url_for('recommendation.career_detail', career_name=career.career_name) }}"
                    class="btn-outline-primary-cp justify-content-center">

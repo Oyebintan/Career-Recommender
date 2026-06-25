@@ -8,18 +8,16 @@ from extensions import db, login_manager, oauth
 import models  # noqa: registers all models with SQLAlchemy metadata
 from models.user import User
 
-from routes.auth_routes       import auth_bp
-from routes.profile_routes    import profile_bp
-from routes.assessment_routes import assessment_bp
-from routes.recommendation_routes import recommendation_bp
-from routes.dashboard_routes  import dashboard_bp
+from routes.auth_routes            import auth_bp
+from routes.profile_routes         import profile_bp
+from routes.assessment_routes      import assessment_bp
+from routes.recommendation_routes  import recommendation_bp
+from routes.dashboard_routes       import dashboard_bp
 
 from services.dataset_loader import DatasetLoader, DatasetLoaderError
 
-# Print logs to stdout with level + timestamp. Most hosting platforms
-# (Hugging Face Spaces, Render, Railway, etc.) capture stdout/stderr into
-# their built-in log viewer automatically, so this is enough to see what
-# actually broke instead of just a generic "Internal Server Error" page.
+# Logs go to stdout — Hugging Face Spaces captures this automatically
+# in the Space's Logs tab, so any 500 error will show the full traceback.
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -28,16 +26,16 @@ logger = logging.getLogger("career_recommender")
 
 
 def create_app():
-    # Fail fast and loud at startup if the datasets can't be found, rather
-    # than letting individual pages silently render with empty data.
+    # Fail loudly at startup if datasets can't be found,
+    # instead of silently serving a broken assessment page.
     try:
         DatasetLoader()
-    except DatasetLoaderError as e:
+        logger.info("Dataset loader OK — datasets/custom found.")
+    except DatasetLoaderError as exc:
         raise RuntimeError(
-            f"Startup check failed — career datasets could not be located.\n{e}"
-        ) from e
+            "Startup aborted — could not locate career datasets.\n" + str(exc)
+        ) from exc
 
-    # Point Flask at the Frontend folder for templates and static files
     base_dir = os.path.dirname(os.path.abspath(__file__))
     app = Flask(
         __name__,
@@ -47,12 +45,10 @@ def create_app():
     )
     app.config.from_object(Config)
 
-    # Init extensions
     db.init_app(app)
     login_manager.init_app(app)
     oauth.init_app(app)
 
-    # Register Google OAuth provider (only when credentials are present)
     if app.config.get("GOOGLE_CLIENT_ID"):
         oauth.register(
             name="google",
@@ -62,7 +58,6 @@ def create_app():
             client_kwargs={"scope": "openid email profile"},
         )
 
-    # Register blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(assessment_bp)
@@ -72,20 +67,21 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    # ── Error handlers ──────────────────────────────────────────────
-    # Log the full traceback server-side (visible in your host's log
-    # viewer) and show the visitor a branded, friendly page instead of
-    # Werkzeug's bare "Internal Server Error" text dump.
+    # ── Friendly error pages ──────────────────────────────────────
     @app.errorhandler(500)
     def handle_500(e):
-        logger.error("Unhandled 500 error:\n%s", traceback.format_exc())
-        return render_template("error.html", code=500,
-                                message="Something went wrong on our end."), 500
+        logger.error("500 Internal Server Error:\n%s", traceback.format_exc())
+        return render_template(
+            "error.html", code=500,
+            message="Something went wrong on our end. We're on it."
+        ), 500
 
     @app.errorhandler(404)
     def handle_404(e):
-        return render_template("error.html", code=404,
-                                message="That page doesn't exist."), 404
+        return render_template(
+            "error.html", code=404,
+            message="That page doesn't exist."
+        ), 404
 
     return app
 
@@ -98,8 +94,9 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-import os
-
 if __name__ == "__main__":
-    # Strictly bind to Hugging Face's required network interface
-    app.run(host="0.0.0.0", port=7860, debug=False)
+    port = int(os.environ.get("PORT", 7860))
+    if os.environ.get("PORT"):
+        app.run(host="0.0.0.0", port=port, debug=False)
+    else:
+        app.run(debug=app.config.get("DEBUG", True))

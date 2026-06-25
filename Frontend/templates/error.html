@@ -1,20 +1,17 @@
 {% extends "base.html" %}
-{% block title %}{{ code }} — CareerPath AI{% endblock %}
+{% block title %}{{ code }} — CareerRecommender{% endblock %}
 {% block footer %}{% endblock %}
 
 {% block content %}
-<div class="d-flex align-items-center justify-content-center text-center"
-     style="min-height:100vh;padding:6rem 1.5rem 3rem;">
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 3rem;">
   <div style="max-width:420px;">
-    <div style="font-size:4rem;font-weight:900;line-height:1;" class="gradient-text mb-2">
+    <div style="font-size:5rem;font-weight:900;line-height:1;background:var(--grad-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;">
       {{ code }}
     </div>
-    <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:.5rem;">
+    <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:.6rem;">
       {% if code == 404 %}Page Not Found{% else %}Something Went Wrong{% endif %}
     </h2>
-    <p style="color:var(--text-sub);font-size:.92rem;margin-bottom:1.75rem;">
-      {{ message }}
-    </p>
+    <p style="color:var(--text-sub);font-size:.92rem;margin-bottom:1.75rem;">{{ message }}</p>
     <a href="{{ url_for('auth.landing') }}" class="btn-primary-grad">
       <i class="fa-solid fa-house"></i> Back to Home
     </a>

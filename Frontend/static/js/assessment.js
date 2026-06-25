@@ -1,131 +1,123 @@
-/* ================================================================
-   CareerRecommender  —  assessment.js
-   Multi-step assessment wizard with category navigation
-================================================================ */
+/* CareerRecommender — assessment.js */
+document.addEventListener('DOMContentLoaded', function () {
 
-(function () {
-  const groups     = Array.from(document.querySelectorAll('.question-group'));
-  const catSteps   = Array.from(document.querySelectorAll('.cat-step'));
-  const progressFill = document.getElementById('assessmentProgress');
-  const progressText = document.getElementById('progressText');
-  const btnPrev    = document.getElementById('btnPrev');
-  const btnNext    = document.getElementById('btnNext');
-  const btnSubmit  = document.getElementById('btnSubmit');
-  const form       = document.getElementById('assessmentForm');
+  var groups      = Array.from(document.querySelectorAll('.question-group'));
+  var stepDots    = Array.from(document.querySelectorAll('.cat-step'));
+  var progressBar = document.getElementById('assessmentProgress');
+  var progressTxt = document.getElementById('progressText');
+  var btnPrev     = document.getElementById('btnPrev');
+  var btnNext     = document.getElementById('btnNext');
+  var btnSubmit   = document.getElementById('btnSubmit');
+  var form        = document.getElementById('assessmentForm');
 
-  let current = 0;
+  if (!groups.length || !form) return;
 
-  if (!groups.length) return;
+  var current = 0;
+  var total   = groups.length;
 
   function showStep(idx) {
-    groups.forEach((g, i) => {
-      g.classList.toggle('active', i === idx);
-    });
-    catSteps.forEach((s, i) => {
-      s.classList.remove('active', 'done');
-      if (i === idx)  s.classList.add('active');
-      if (i < idx)    s.classList.add('done');
+    groups.forEach(function (g, i) { g.classList.toggle('active', i === idx); });
+    stepDots.forEach(function (dot, i) {
+      dot.classList.remove('active', 'done');
+      if (i === idx) dot.classList.add('active');
+      if (i < idx)   dot.classList.add('done');
     });
 
-    const pct = Math.round(((idx + 1) / groups.length) * 100);
-    if (progressFill) progressFill.style.width = pct + '%';
-    if (progressText) progressText.textContent  = `Step ${idx + 1} of ${groups.length}`;
+    var pct = Math.round(((idx + 1) / total) * 100);
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (progressTxt) progressTxt.textContent  = 'Step ' + (idx + 1) + ' of ' + total;
 
-    if (btnPrev)   btnPrev.style.display   = idx === 0 ? 'none' : 'inline-flex';
-    if (btnNext)   btnNext.style.display   = idx < groups.length - 1 ? 'inline-flex' : 'none';
-    if (btnSubmit) btnSubmit.style.display = idx === groups.length - 1 ? 'inline-flex' : 'none';
+    if (btnPrev)   btnPrev.style.display   = idx === 0         ? 'none'        : 'inline-flex';
+    if (btnNext)   btnNext.style.display   = idx < total - 1   ? 'inline-flex' : 'none';
+    if (btnSubmit) btnSubmit.style.display = idx === total - 1 ? 'inline-flex' : 'none';
 
-    const top = document.querySelector('.assessment-wrap');
-    if (top) top.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var wrap = document.querySelector('.assessment-wrap');
+    if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function validateCurrent() {
-    const group   = groups[current];
-    const radios  = group.querySelectorAll('input[type="radio"]');
-    const names   = new Set(Array.from(radios).map(r => r.name));
-    const missing = [];
+    var group   = groups[current];
+    var radios  = group.querySelectorAll('input[type="radio"]');
+    var names   = new Set(Array.from(radios).map(function (r) { return r.name; }));
+    var missing = [];
 
-    names.forEach(name => {
-      const answered = group.querySelector(`input[name="${name}"]:checked`);
-      if (!answered) missing.push(name);
-    });
-
-    group.querySelectorAll('.q-card').forEach(card => {
-      const inputs = card.querySelectorAll('input[type="radio"]');
-      if (!inputs.length) return;
-      const answered = card.querySelector('input[type="radio"]:checked');
-      if (answered) {
-        card.style.borderColor = '';
-      } else if (missing.includes(inputs[0].name)) {
-        card.style.borderColor = '#ff4d6d';
+    names.forEach(function (name) {
+      if (!group.querySelector('input[name="' + name + '"]:checked')) {
+        missing.push(name);
       }
     });
 
+    group.querySelectorAll('.q-card').forEach(function (card) {
+      var inputs = card.querySelectorAll('input[type="radio"]');
+      if (!inputs.length) return;
+      var unanswered = missing.includes(inputs[0].name);
+      card.style.borderColor = unanswered ? '#ff4d6d' : '';
+      card.style.boxShadow   = unanswered ? '0 0 0 2px rgba(255,77,109,.2)' : '';
+    });
+
     if (missing.length) {
-      showToast(`Please answer all ${missing.length} question(s) in this section.`, 'error');
+      toast('Please answer all ' + missing.length + ' question(s) before continuing.', 'error');
       return false;
     }
     return true;
   }
 
-  function showToast(msg, type='info') {
-    let container = document.querySelector('.flash-container');
+  function toast(msg, type) {
+    type = type || 'info';
+    var container = document.querySelector('.flash-container');
     if (!container) {
       container = document.createElement('div');
       container.className = 'flash-container';
       document.body.appendChild(container);
     }
-    const icons = { error: 'fa-circle-exclamation', success: 'fa-circle-check', info: 'fa-circle-info' };
-    const div = document.createElement('div');
-    div.className = `flash-msg ${type}`;
-    div.innerHTML = `<i class="fa-solid ${icons[type] || icons.info}"></i> ${msg}`;
-    container.appendChild(div);
-    div.addEventListener('click', () => div.remove());
-    setTimeout(() => { if (div.parentNode) div.remove(); }, 4000);
+    var icons = { error: 'fa-circle-exclamation', success: 'fa-circle-check', info: 'fa-circle-info' };
+    var el = document.createElement('div');
+    el.className = 'flash-msg ' + type;
+    el.innerHTML = '<i class="fa-solid ' + (icons[type] || icons.info) + '"></i> ' + msg;
+    container.appendChild(el);
+    el.addEventListener('click', function () { el.remove(); });
+    setTimeout(function () { if (el.parentNode) el.remove(); }, 4500);
   }
 
   if (btnPrev) {
-    btnPrev.addEventListener('click', () => {
+    btnPrev.addEventListener('click', function () {
       if (current > 0) { current--; showStep(current); }
     });
   }
 
   if (btnNext) {
-    btnNext.addEventListener('click', () => {
+    btnNext.addEventListener('click', function () {
       if (!validateCurrent()) return;
-      if (current < groups.length - 1) { current++; showStep(current); }
+      if (current < total - 1) { current++; showStep(current); }
     });
   }
 
-  if (form) {
-    form.addEventListener('submit', e => {
-      let firstFail = -1;
-      groups.forEach((group, idx) => {
-        const radios = group.querySelectorAll('input[type="radio"]');
-        const names  = new Set(Array.from(radios).map(r => r.name));
-        names.forEach(name => {
-          if (!group.querySelector(`input[name="${name}"]:checked`)) {
-            if (firstFail === -1) firstFail = idx;
-          }
-        });
+  form.addEventListener('submit', function (e) {
+    var firstFail = -1;
+    groups.forEach(function (group, idx) {
+      var radios = group.querySelectorAll('input[type="radio"]');
+      var names  = new Set(Array.from(radios).map(function (r) { return r.name; }));
+      names.forEach(function (name) {
+        if (!group.querySelector('input[name="' + name + '"]:checked')) {
+          if (firstFail === -1) firstFail = idx;
+        }
       });
-
-      if (firstFail !== -1) {
-        e.preventDefault();
-        current = firstFail;
-        showStep(current);
-        validateCurrent();
-        showToast('Please answer all questions before submitting.', 'error');
-      }
     });
-  }
+    if (firstFail !== -1) {
+      e.preventDefault();
+      current = firstFail;
+      showStep(current);
+      validateCurrent();
+      toast('Please answer all questions before submitting.', 'error');
+    }
+  });
 
-  document.querySelectorAll('.q-card input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      const card = radio.closest('.q-card');
-      if (card) card.style.borderColor = '';
+  document.querySelectorAll('.q-card input[type="radio"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      var card = radio.closest('.q-card');
+      if (card) { card.style.borderColor = ''; card.style.boxShadow = ''; }
     });
   });
 
   showStep(0);
-})();
+});
