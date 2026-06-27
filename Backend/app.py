@@ -5,19 +5,17 @@ from flask import Flask, render_template
 from config import Config
 from extensions import db, login_manager, oauth
 
-import models  # noqa: registers all models with SQLAlchemy metadata
+import models
 from models.user import User
 
-from routes.auth_routes            import auth_bp
-from routes.profile_routes         import profile_bp
-from routes.assessment_routes      import assessment_bp
-from routes.recommendation_routes  import recommendation_bp
-from routes.dashboard_routes       import dashboard_bp
+from routes.auth_routes           import auth_bp
+from routes.profile_routes        import profile_bp
+from routes.assessment_routes     import assessment_bp
+from routes.recommendation_routes import recommendation_bp
+from routes.dashboard_routes      import dashboard_bp
 
 from services.dataset_loader import DatasetLoader, DatasetLoaderError
 
-# Logs go to stdout — Hugging Face Spaces captures this automatically
-# in the Space's Logs tab, so any 500 error will show the full traceback.
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -26,8 +24,6 @@ logger = logging.getLogger("career_recommender")
 
 
 def create_app():
-    # Fail loudly at startup if datasets can't be found,
-    # instead of silently serving a broken assessment page.
     try:
         DatasetLoader()
         logger.info("Dataset loader OK — datasets/custom found.")
@@ -67,13 +63,12 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    # ── Friendly error pages ──────────────────────────────────────
     @app.errorhandler(500)
     def handle_500(e):
-        logger.error("500 Internal Server Error:\n%s", traceback.format_exc())
+        logger.error("500 error:\n%s", traceback.format_exc())
         return render_template(
             "error.html", code=500,
-            message="Something went wrong on our end. We're on it."
+            message="Something went wrong on our end."
         ), 500
 
     @app.errorhandler(404)
@@ -96,7 +91,4 @@ def load_user(user_id):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
-    if os.environ.get("PORT"):
-        app.run(host="0.0.0.0", port=port, debug=False)
-    else:
-        app.run(debug=app.config.get("DEBUG", True))
+    app.run(host="0.0.0.0", port=port, debug=False)

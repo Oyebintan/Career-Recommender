@@ -9,11 +9,9 @@ class DatasetLoaderError(Exception):
 
 class DatasetLoader:
     """
-    Locates the datasets/custom folder by walking upward from this file,
-    rather than assuming a fixed folder depth. This survives any hosting
-    platform layout (Hugging Face Spaces, Render, Railway, local machine).
-
-    Override with env var:  DATASETS_DIR=/absolute/path/to/datasets/custom
+    Finds datasets/custom by walking upward from this file.
+    Works on any hosting platform regardless of folder depth.
+    Override with env var: DATASETS_DIR=/absolute/path/to/datasets/custom
     """
 
     def __init__(self):
@@ -21,7 +19,6 @@ class DatasetLoader:
         self.onet_dataset_path   = self.custom_dataset_path.parent / "onet"
 
     def _locate(self) -> Path:
-        # 1. Explicit env override always wins
         env = os.environ.get("DATASETS_DIR")
         if env:
             p = Path(env).resolve()
@@ -31,14 +28,12 @@ class DatasetLoader:
                 f"DATASETS_DIR='{p}' but career_profiles.csv not found there."
             )
 
-        # 2. Walk upward from this file's location
         here = Path(__file__).resolve().parent
         for level in [here] + list(here.parents):
             candidate = level / "datasets" / "custom"
             if (candidate / "career_profiles.csv").exists():
                 return candidate
 
-        # 3. Nothing found — raise a clear, actionable error
         searched = [str(l / "datasets" / "custom") for l in [here] + list(here.parents)]
         raise DatasetLoaderError(
             "Cannot locate datasets/custom folder. Searched:\n"
