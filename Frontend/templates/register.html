@@ -3,21 +3,23 @@
 {% block footer %}{% endblock %}
 
 {% block content %}
-<div class="auth-wrapper pt-nav">
+<div class="auth-wrapper">
 
   <div class="auth-left d-none d-lg-flex">
+    <div class="spiral-ring sr-2" style="opacity:.4;"></div>
+    <div class="spiral-ring sr-4" style="opacity:.4;"></div>
     <div class="auth-left-icon">🚀</div>
     <h2>Start Your Journey</h2>
-    <p>Create a free account and discover careers that actually fit who you are.</p>
-    <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:.85rem;width:100%;max-width:280px;">
-      <div style="display:flex;align-items:center;gap:.6rem;color:#fff;font-size:.85rem;">
-        <i class="fa-solid fa-circle-check" style="color:#43e6b2;"></i> 100% free, no credit card
+    <p>Discover careers that actually fit who you are.</p>
+    <div class="auth-left-features">
+      <div class="auth-feat-row">
+        <i class="fa-solid fa-circle-check"></i> 100% free, no credit card
       </div>
-      <div style="display:flex;align-items:center;gap:.6rem;color:#fff;font-size:.85rem;">
-        <i class="fa-solid fa-circle-check" style="color:#43e6b2;"></i> Takes less than 10 minutes
+      <div class="auth-feat-row">
+        <i class="fa-solid fa-circle-check"></i> Takes less than 10 minutes
       </div>
-      <div style="display:flex;align-items:center;gap:.6rem;color:#fff;font-size:.85rem;">
-        <i class="fa-solid fa-circle-check" style="color:#43e6b2;"></i> Your data stays private
+      <div class="auth-feat-row">
+        <i class="fa-solid fa-circle-check"></i> Your data stays private
       </div>
     </div>
   </div>
@@ -25,8 +27,7 @@
   <div class="auth-right">
     <div class="auth-form-box">
 
-      <a href="{{ url_for('auth.landing') }}"
-         style="font-size:.82rem;color:var(--text-muted);display:inline-flex;align-items:center;gap:.35rem;margin-bottom:1.5rem;">
+      <a href="{{ url_for('auth.landing') }}" class="auth-back-link">
         <i class="fa-solid fa-arrow-left"></i> Back to home
       </a>
 
@@ -34,7 +35,7 @@
       <p class="auth-subtitle">Let's find the career that fits you ✨</p>
 
       <a href="{{ url_for('auth.google_login') }}" class="btn-google">
-        <svg width="20" height="20" viewBox="0 0 48 48">
+        <svg width="18" height="18" viewBox="0 0 48 48">
           <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
           <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
           <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
@@ -46,7 +47,6 @@
       <div class="auth-divider">or sign up with email</div>
 
       <form method="POST" action="{{ url_for('auth.register') }}" novalidate>
-
         <div class="form-group">
           <label class="form-label-cp">Full Name</label>
           <div class="input-icon-wrap">
@@ -55,7 +55,6 @@
                    placeholder="Your full name" required autocomplete="name">
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label-cp">Email Address</label>
           <div class="input-icon-wrap">
@@ -64,28 +63,31 @@
                    placeholder="you@example.com" required autocomplete="email">
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label-cp">Password</label>
           <div class="input-icon-wrap position-relative">
             <i class="fa-solid fa-lock input-icon"></i>
             <input type="password" name="password" class="form-control-cp"
-                   placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
-            <button type="button" class="pw-toggle"><i class="fa-solid fa-eye"></i></button>
+                   placeholder="At least 6 characters" required minlength="6"
+                   autocomplete="new-password">
+            <button type="button" class="pw-toggle">
+              <i class="fa-solid fa-eye"></i>
+            </button>
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label-cp">Confirm Password</label>
           <div class="input-icon-wrap position-relative">
             <i class="fa-solid fa-lock input-icon"></i>
             <input type="password" name="confirm_password" class="form-control-cp"
-                   placeholder="Re-enter your password" required minlength="6" autocomplete="new-password">
-            <button type="button" class="pw-toggle"><i class="fa-solid fa-eye"></i></button>
+                   placeholder="Re-enter your password" required minlength="6"
+                   autocomplete="new-password">
+            <button type="button" class="pw-toggle">
+              <i class="fa-solid fa-eye"></i>
+            </button>
           </div>
         </div>
-
-        <button type="submit" class="btn-primary-grad w-100 justify-content-center mt-2">
+        <button type="submit" class="btn-primary-grad w-100 justify-content-center mt-1">
           <i class="fa-solid fa-user-plus"></i> Create My Account
         </button>
       </form>

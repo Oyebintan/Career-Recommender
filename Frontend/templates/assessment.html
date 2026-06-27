@@ -8,11 +8,16 @@
   <div class="container">
 
     <div class="text-center" style="padding-top:1rem;">
-      <div class="cp-badge mx-auto mb-2"><i class="fa-solid fa-clipboard-question"></i> Step 2 of 2</div>
+      <div class="cp-badge mx-auto mb-2">
+        <i class="fa-solid fa-clipboard-question"></i> Step 2 of 2
+      </div>
       <h2 style="font-size:1.9rem;font-weight:800;">Career Assessment</h2>
-      <p style="color:var(--text-sub);font-size:.9rem;" id="progressText">Step 1 of {{ pg|length }}</p>
+      <p style="color:var(--text-sub);font-size:.9rem;" id="progressText">
+        Step 1 of {{ pg|length }}
+      </p>
       <p style="color:var(--text-muted);font-size:.78rem;">
-        <i class="fa-regular fa-clock"></i> About 5–7 minutes &middot; {{ questions|length }} questions
+        <i class="fa-regular fa-clock"></i>
+        About 5–7 minutes &middot; {{ questions|length }} questions
       </p>
     </div>
 
@@ -22,7 +27,9 @@
 
     <div class="cat-steps">
       {% for group in pg %}
-        <span class="cat-step{% if loop.first %} active{% endif %}">{{ loop.index }}</span>
+        <span class="cat-step{% if loop.first %} active{% endif %}">
+          {{ loop.index }}
+        </span>
       {% endfor %}
     </div>
 
@@ -54,33 +61,43 @@
                 <div class="q-text">{{ q.question }}</div>
                 <div class="likert-row">
                   <div class="likert-option">
-                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_1" value="1" required>
+                    <input type="radio" name="q_{{ q.question_id }}"
+                           id="q{{ q.question_id }}_1" value="1" required>
                     <label class="likert-label" for="q{{ q.question_id }}_1">
-                      <span class="likert-emoji">😣</span><span class="likert-text">Strongly<br>Disagree</span>
+                      <span class="likert-emoji">😣</span>
+                      <span class="likert-text">Strongly<br>Disagree</span>
                     </label>
                   </div>
                   <div class="likert-option">
-                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_2" value="2">
+                    <input type="radio" name="q_{{ q.question_id }}"
+                           id="q{{ q.question_id }}_2" value="2">
                     <label class="likert-label" for="q{{ q.question_id }}_2">
-                      <span class="likert-emoji">🙁</span><span class="likert-text">Disagree</span>
+                      <span class="likert-emoji">🙁</span>
+                      <span class="likert-text">Disagree</span>
                     </label>
                   </div>
                   <div class="likert-option">
-                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_3" value="3">
+                    <input type="radio" name="q_{{ q.question_id }}"
+                           id="q{{ q.question_id }}_3" value="3">
                     <label class="likert-label" for="q{{ q.question_id }}_3">
-                      <span class="likert-emoji">😐</span><span class="likert-text">Neutral</span>
+                      <span class="likert-emoji">😐</span>
+                      <span class="likert-text">Neutral</span>
                     </label>
                   </div>
                   <div class="likert-option">
-                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_4" value="4">
+                    <input type="radio" name="q_{{ q.question_id }}"
+                           id="q{{ q.question_id }}_4" value="4">
                     <label class="likert-label" for="q{{ q.question_id }}_4">
-                      <span class="likert-emoji">🙂</span><span class="likert-text">Agree</span>
+                      <span class="likert-emoji">🙂</span>
+                      <span class="likert-text">Agree</span>
                     </label>
                   </div>
                   <div class="likert-option">
-                    <input type="radio" name="q_{{ q.question_id }}" id="q{{ q.question_id }}_5" value="5">
+                    <input type="radio" name="q_{{ q.question_id }}"
+                           id="q{{ q.question_id }}_5" value="5">
                     <label class="likert-label" for="q{{ q.question_id }}_5">
-                      <span class="likert-emoji">🤩</span><span class="likert-text">Strongly<br>Agree</span>
+                      <span class="likert-emoji">🤩</span>
+                      <span class="likert-text">Strongly<br>Agree</span>
                     </label>
                   </div>
                 </div>
@@ -90,14 +107,16 @@
         {% endfor %}
 
         <div class="assessment-nav">
-          <button type="button" id="btnPrev" class="btn-outline-primary-cp" style="display:none;">
+          <button type="button" id="btnPrev"
+                  class="btn-outline-primary-cp" style="display:none;">
             <i class="fa-solid fa-arrow-left"></i> Previous
           </button>
           <div></div>
           <button type="button" id="btnNext" class="btn-primary-grad">
             Next <i class="fa-solid fa-arrow-right"></i>
           </button>
-          <button type="submit" id="btnSubmit" class="btn-primary-grad" style="display:none;">
+          <button type="submit" id="btnSubmit"
+                  class="btn-primary-grad" style="display:none;">
             <i class="fa-solid fa-check"></i> Submit Assessment
           </button>
         </div>

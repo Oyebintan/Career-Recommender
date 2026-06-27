@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<!-- ── Navbar: hamburger | brand (center) | theme toggle ── -->
+<!-- Navbar: hamburger | brand center | theme toggle -->
 <nav class="cp-nav">
   <div class="cp-nav-inner container">
 
@@ -50,7 +50,8 @@
     <span class="cp-drawer-logo">
       <i class="fa-solid fa-compass-drafting"></i> CareerRecommender
     </span>
-    <button type="button" class="cp-drawer-close" data-bs-dismiss="offcanvas" aria-label="Close">
+    <button type="button" class="cp-drawer-close"
+            data-bs-dismiss="offcanvas" aria-label="Close">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
@@ -77,6 +78,7 @@
   </div>
 </div>
 
+<!-- Flash Messages -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <div class="flash-container" id="flashContainer">
