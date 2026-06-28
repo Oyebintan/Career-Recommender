@@ -7,29 +7,37 @@
     <div style="max-width:700px;margin:0 auto;">
 
       <a href="{{ url_for('recommendation.results', assessment_id=assessment_id) }}"
-         style="font-size:.82rem;color:var(--text-muted);display:inline-flex;align-items:center;gap:.35rem;margin-bottom:1.25rem;">
+         style="font-size:.82rem;color:var(--text-muted);display:inline-flex;
+                align-items:center;gap:.35rem;margin-bottom:1.25rem;">
         <i class="fa-solid fa-arrow-left"></i> Back to results
       </a>
 
       <div class="text-center mb-4">
-        <div class="cp-badge mx-auto mb-2"><i class="fa-solid fa-list-check"></i> Skill Gap Analysis</div>
+        <div class="cp-badge mx-auto mb-2">
+          <i class="fa-solid fa-list-check"></i> Skill Gap Analysis
+        </div>
         <h2 style="font-size:1.8rem;font-weight:800;">{{ career_name }}</h2>
         <p style="color:var(--text-sub);font-size:.9rem;">
-          Tell us what skills you already have, and we'll show you what's missing.
+          Tell us what skills you already have and we'll show what's missing.
         </p>
       </div>
 
       <div class="cp-card mb-4">
         <form method="POST"
-              action="{{ url_for('recommendation.skill_gap', assessment_id=assessment_id, career_name=career_name) }}">
+              action="{{ url_for('recommendation.skill_gap',
+                        assessment_id=assessment_id,
+                        career_name=career_name) }}">
           <div class="form-group">
-            <label class="form-label-cp">Your Skills (comma-separated)</label>
+            <label class="form-label-cp">
+              Your Skills (comma-separated)
+            </label>
             <input type="text" name="user_skills" class="form-control-cp"
                    placeholder="e.g. Python, Git, SQL"
-                   value="{{ gap_result.user_skills|join(', ') if gap_result else '' }}" required>
+                   value="{{ gap_result.user_skills|join(', ') if gap_result else '' }}"
+                   required>
           </div>
           <button type="submit" class="btn-primary-grad w-100 justify-content-center">
-            <i class="fa-solid fa-magnifying-glass-chart"></i> Analyze My Skills
+            <i class="fa-solid fa-magnifying-glass-chart"></i> Analyse My Skills
           </button>
         </form>
       </div>
@@ -39,8 +47,11 @@
           <div class="readiness-ring-wrap">
             <div class="readiness-score-num">{{ gap_result.readiness_score }}%</div>
             <div class="readiness-label">Skill Readiness</div>
-            <div class="cp-progress-wrap mt-3" style="max-width:300px;margin:0 auto;">
-              <div class="cp-progress-fill" data-width="{{ gap_result.readiness_score }}%" style="width:0%"></div>
+            <div class="cp-progress-wrap mt-3"
+                 style="max-width:300px;margin:0 auto;">
+              <div class="cp-progress-fill"
+                   data-width="{{ gap_result.readiness_score }}%"
+                   style="width:0%"></div>
             </div>
           </div>
         </div>
@@ -49,26 +60,32 @@
           <div class="col-md-6">
             <div class="cp-card h-100">
               <div class="skills-section-title">
-                <i class="fa-solid fa-circle-check" style="color:#10b981;"></i> Skills You Have
+                <i class="fa-solid fa-circle-check"
+                   style="color:var(--purple-500);"></i> Skills You Have
               </div>
               {% for skill in gap_result.user_skills %}
                 {% if skill in gap_result.required_skills %}
                   <span class="skill-pill have">{{ skill }}</span>
                 {% endif %}
               {% else %}
-                <p class="text-muted-cp" style="font-size:.85rem;">No matching skills yet.</p>
+                <p class="text-muted-cp" style="font-size:.85rem;">
+                  No matching skills yet.
+                </p>
               {% endfor %}
             </div>
           </div>
           <div class="col-md-6">
             <div class="cp-card h-100">
               <div class="skills-section-title">
-                <i class="fa-solid fa-circle-xmark" style="color:#f43f5e;"></i> Skills to Learn
+                <i class="fa-solid fa-circle-xmark"
+                   style="color:#ef4444;"></i> Skills to Learn
               </div>
               {% for skill in gap_result.missing_skills %}
                 <span class="skill-pill missing">{{ skill }}</span>
               {% else %}
-                <p class="text-muted-cp" style="font-size:.85rem;">You're fully equipped! 🎉</p>
+                <p class="text-muted-cp" style="font-size:.85rem;">
+                  You're fully equipped! 🎉
+                </p>
               {% endfor %}
             </div>
           </div>

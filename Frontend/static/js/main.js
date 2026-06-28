@@ -17,6 +17,7 @@ function applyTheme(theme) {
   }
 }
 
+// Apply before paint to prevent flash
 (function () {
   var t = localStorage.getItem(THEME_KEY) ||
     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -43,7 +44,8 @@ function initPasswordToggles() {
       if (!input) return;
       var show = input.type === 'password';
       input.type = show ? 'text' : 'password';
-      btn.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+      btn.querySelector('i').className =
+        show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
     });
   });
 }
@@ -84,7 +86,8 @@ function initNavScroll() {
   var nav = document.querySelector('.cp-nav');
   if (!nav) return;
   window.addEventListener('scroll', function () {
-    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,.12)' : 'none';
+    nav.style.boxShadow =
+      window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,.12)' : 'none';
   }, { passive: true });
 }
 
@@ -102,10 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
   applyTheme(saved);
 
   var btn = document.getElementById('themeToggle');
-  if (btn) btn.addEventListener('click', function () {
-    var current = document.documentElement.getAttribute('data-theme') || 'light';
-    applyTheme(current === 'dark' ? 'light' : 'dark');
-  });
+  if (btn) {
+    btn.addEventListener('click', function () {
+      var current =
+        document.documentElement.getAttribute('data-theme') || 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
 
   initFlash();
   initPasswordToggles();
