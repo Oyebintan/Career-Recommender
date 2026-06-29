@@ -3,12 +3,42 @@
 {% block footer %}{% endblock %}
 
 {% block content %}
+
+<!-- Mobile animated header (shown only on small screens) -->
+<div class="auth-mobile-top">
+  <div class="spiral-wrap" aria-hidden="true">
+    <div class="spiral-ring sr-1"></div>
+    <div class="spiral-ring sr-2"></div>
+    <div class="spiral-ring sr-4"></div>
+    <div class="spiral-dot sd-1"></div>
+    <div class="spiral-dot sd-2"></div>
+  </div>
+  <div class="auth-mobile-top-inner">
+    <div class="auth-left-icon-wrap" style="margin-bottom:.75rem;">
+      <span class="auth-left-icon">🚀</span>
+    </div>
+    <h4>Start Your Journey</h4>
+    <p>Discover careers that actually fit who you are.</p>
+  </div>
+</div>
+
 <div class="auth-wrapper">
 
+  <!-- Desktop left panel -->
   <div class="auth-left d-none d-lg-flex">
-    <div class="spiral-ring sr-2" style="opacity:.4;"></div>
-    <div class="spiral-ring sr-4" style="opacity:.4;"></div>
-    <div class="auth-left-icon">🚀</div>
+    <div class="spiral-wrap" aria-hidden="true">
+      <div class="spiral-ring sr-1"></div>
+      <div class="spiral-ring sr-2"></div>
+      <div class="spiral-ring sr-3"></div>
+      <div class="spiral-ring sr-4"></div>
+      <div class="spiral-ring sr-5"></div>
+      <div class="spiral-dot sd-1"></div>
+      <div class="spiral-dot sd-2"></div>
+    </div>
+
+    <div class="auth-left-icon-wrap">
+      <span class="auth-left-icon">🚀</span>
+    </div>
     <h2>Start Your Journey</h2>
     <p>Discover careers that actually fit who you are.</p>
     <div class="auth-left-features">
@@ -24,6 +54,7 @@
     </div>
   </div>
 
+  <!-- Right form panel -->
   <div class="auth-right">
     <div class="auth-form-box">
 
@@ -52,7 +83,8 @@
           <div class="input-icon-wrap">
             <i class="fa-solid fa-user input-icon"></i>
             <input type="text" name="name" class="form-control-cp"
-                   placeholder="Your full name" required autocomplete="name">
+                   placeholder="Your full name"
+                   required autocomplete="name">
           </div>
         </div>
         <div class="form-group">
@@ -60,7 +92,8 @@
           <div class="input-icon-wrap">
             <i class="fa-solid fa-envelope input-icon"></i>
             <input type="email" name="email" class="form-control-cp"
-                   placeholder="you@example.com" required autocomplete="email">
+                   placeholder="you@example.com"
+                   required autocomplete="email">
           </div>
         </div>
         <div class="form-group">
@@ -68,8 +101,8 @@
           <div class="input-icon-wrap position-relative">
             <i class="fa-solid fa-lock input-icon"></i>
             <input type="password" name="password" class="form-control-cp"
-                   placeholder="At least 6 characters" required minlength="6"
-                   autocomplete="new-password">
+                   placeholder="At least 6 characters"
+                   required minlength="6" autocomplete="new-password">
             <button type="button" class="pw-toggle">
               <i class="fa-solid fa-eye"></i>
             </button>
@@ -80,20 +113,22 @@
           <div class="input-icon-wrap position-relative">
             <i class="fa-solid fa-lock input-icon"></i>
             <input type="password" name="confirm_password" class="form-control-cp"
-                   placeholder="Re-enter your password" required minlength="6"
-                   autocomplete="new-password">
+                   placeholder="Re-enter your password"
+                   required minlength="6" autocomplete="new-password">
             <button type="button" class="pw-toggle">
               <i class="fa-solid fa-eye"></i>
             </button>
           </div>
         </div>
-        <button type="submit" class="btn-primary-grad w-100 justify-content-center mt-1">
+        <button type="submit"
+                class="btn-primary-grad w-100 justify-content-center mt-1">
           <i class="fa-solid fa-user-plus"></i> Create My Account
         </button>
       </form>
 
       <div class="auth-footer-link">
-        Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a>
+        Already have an account?
+        <a href="{{ url_for('auth.login') }}">Sign in</a>
       </div>
 
     </div>
