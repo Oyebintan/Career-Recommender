@@ -18,13 +18,10 @@ class RecommendationService:
         )
 
         # Pre-compute each career's own theoretical max score (every
-        # mapped question answered "Strongly Agree" = 5). This is what
-        # each career gets normalized against, instead of normalizing
-        # against whichever career happened to score highest in this
-        # particular response. Without this, careers that simply have
-        # MORE mapped questions (e.g. 10 vs 6) always have a higher raw
-        # score ceiling and structurally dominate the rankings — even
-        # for users who are only mildly interested in them.
+        # mapped question answered "Strongly Agree" = 5). Each career
+        # is normalized against ITS OWN max, not the highest scorer
+        # in a given response — otherwise careers with more mapped
+        # questions structurally dominate the rankings.
         self.career_max_scores = (
             self.mapping_df.groupby("career_name")["weight"].sum() * 5
         ).to_dict()
@@ -67,20 +64,6 @@ class RecommendationService:
         Normalizes each career's score against ITS OWN maximum
         possible score, not against the highest score among the
         careers that happened to match in this response.
-
-        This is the fix for the "everything recommends Software
-        Engineer" bias: previously, normalize_scores() divided every
-        career's raw score by max(career_scores.values()) — the
-        single highest raw score across ALL matched careers. Careers
-        mapped to more questions (e.g. 13 tech careers each had 10
-        mapped questions vs 6-7 for non-tech careers) have a
-        structurally higher raw-score ceiling, so they would hit
-        that shared maximum first and dominate the top of the list
-        even when a user was only moderately positive about them.
-
-        Now each career's percentage reflects how close the user's
-        answers came to "perfect interest" in THAT specific career,
-        independent of how many questions happen to be mapped to it.
         """
 
         if not career_scores:
@@ -93,8 +76,6 @@ class RecommendationService:
             max_possible = self.career_max_scores.get(career)
 
             if not max_possible:
-                # Defensive guard: a career with zero mapped weight
-                # (shouldn't happen with valid data) can't be scored.
                 normalized_scores[career] = 0.0
                 continue
 
