@@ -1,112 +1,163 @@
 """
 generate_flowchart.py
 
-Generates Figure 3.2 (Career Recommendation and Skill Gap Flowchart).
-
-Unlike generate_erd.py and generate_architecture_diagram.py, this
-flowchart cannot be introspected automatically the same way, because it
-depicts a sequence of RUNTIME LOGIC (the order operations happen in),
-not static structure like tables or files. However, every box and label
-below is named after the exact method it represents, taken directly
-from your live services/recommendation_service.py and
-services/skill_gap_service.py.
-
-If you rename any of these methods, update the corresponding label
-string in this script so the diagram stays in sync with your code.
+Generates Figure 3.2 as TWO VERTICAL COLUMNS placed side by side
+(left column, then right column), connected by a horizontal arrow —
+instead of one long straight chain.
 
 USAGE
 -----
-1. Place this file inside your Backend/ folder (same level as app.py).
-2. From inside Backend/, with your virtual environment active, run:
+pip install graphviz pillow
+python generate_flowchart.py
 
-       pip install graphviz
-       python generate_flowchart.py
-
-3. The script writes:
-       diagram_output/Figure_3_2_Flowchart.png
-       diagram_output/Figure_3_2_Flowchart.pdf
+Writes: diagram_output/Figure_3_2_Flowchart.png
 """
 
 from pathlib import Path
 import graphviz
+from PIL import Image, ImageDraw, ImageFont
 
 BACKEND_DIR = Path(__file__).resolve().parent
+TMP_DIR = BACKEND_DIR / "_flowchart_col_tmp"
+
+PURPLE = "#4c1d95"
+LILAC = "#ede9fe"
+PALE = "#f5f3ff"
+DIAMOND = "#ddd6fe"
 
 
-def build_flowchart():
+def render_column(name, nodes, edges):
     dot = graphviz.Digraph(
-        "Flowchart",
+        name,
         format="png",
         graph_attr={
             "rankdir": "TB",
             "splines": "spline",
             "bgcolor": "white",
             "fontname": "Helvetica",
-            "nodesep": "0.4",
-            "ranksep": "0.5",
+            "nodesep": "0.3",
+            "ranksep": "0.35",
+            "margin": "0.15",
         },
         node_attr={"fontname": "Helvetica", "fontsize": "11"},
-        edge_attr={"fontname": "Helvetica", "fontsize": "10"},
+        edge_attr={"fontname": "Helvetica", "fontsize": "9", "color": "#4a4a4a"},
+    )
+    for node_id, label, shape, fillcolor, fontcolor in nodes:
+        dot.node(
+            node_id, label, shape=shape,
+            style="filled,rounded" if shape == "box" else "filled",
+            fillcolor=fillcolor, fontcolor=fontcolor,
+        )
+    for src, dst, label, style in edges:
+        kwargs = {}
+        if label:
+            kwargs["label"] = label
+        if style:
+            kwargs["style"] = style
+        dot.edge(src, dst, **kwargs)
+
+    TMP_DIR.mkdir(exist_ok=True)
+    out_path = TMP_DIR / name
+    dot.render(str(out_path), format="png", cleanup=True)
+    return str(out_path) + ".png"
+
+
+def stitch_columns_side_by_side(col_image_paths, output_path, connector_label=""):
+    images = [Image.open(p).convert("RGBA") for p in col_image_paths]
+
+    gap = 90
+    max_height = max(img.height for img in images)
+    total_width = sum(img.width for img in images) + gap * (len(images) - 1) + 20
+
+    canvas = Image.new("RGBA", (total_width, max_height + 20), "white")
+    draw = ImageDraw.Draw(canvas)
+
+    try:
+        font = ImageFont.truetype("DejaVuSans.ttf", 12)
+    except Exception:
+        font = ImageFont.load_default()
+
+    x_cursor = 10
+    for i, img in enumerate(images):
+        y = 10 + (max_height - img.height) // 2
+        canvas.paste(img, (x_cursor, y), img)
+        x_cursor += img.width
+
+        if i < len(images) - 1:
+            arrow_y = max_height // 2 + 10
+            left_x = x_cursor + 10
+            right_x = x_cursor + gap - 12
+            draw.line([(left_x, arrow_y), (right_x, arrow_y)], fill="#4a4a4a", width=2)
+            draw.polygon(
+                [
+                    (right_x - 8, arrow_y - 6),
+                    (right_x - 8, arrow_y + 6),
+                    (right_x + 2, arrow_y),
+                ],
+                fill="#4a4a4a",
+            )
+            if connector_label:
+                draw.text((left_x - 5, arrow_y - 28), connector_label,
+                          fill="#4a4a4a", font=font)
+            x_cursor += gap
+
+    canvas.convert("RGB").save(output_path)
+
+
+def build_flowchart():
+    left_path = render_column(
+        "left",
+        nodes=[
+            ("start", "User submits\nassessment answers", "ellipse", PURPLE, "white"),
+            ("answers", "answers = {question_id:\nlikert_value}", "parallelogram", PALE, "black"),
+            ("calc", "calculate_scores()\nraw_score += answer × weight", "box", LILAC, "black"),
+            ("norm", "normalize_scores()\nscore% = raw ÷ own max × 100", "box", LILAC, "black"),
+            ("rank", "get_top_careers()\nsort by score%, descending", "box", LILAC, "black"),
+            ("top3", "Top 3 careers + match %\nsaved to recommendations table", "parallelogram", PALE, "black"),
+        ],
+        edges=[
+            ("start", "answers", None, None),
+            ("answers", "calc", None, None),
+            ("calc", "norm", None, None),
+            ("norm", "rank", None, None),
+            ("rank", "top3", None, None),
+        ],
     )
 
-    def start_end(name, label):
-        dot.node(name, label, shape="ellipse", style="filled",
-                  fillcolor="#4c1d95", fontcolor="white")
-
-    def process(name, label):
-        dot.node(name, label, shape="box", style="filled,rounded",
-                  fillcolor="#ede9fe")
-
-    def decision(name, label):
-        dot.node(name, label, shape="diamond", style="filled",
-                  fillcolor="#ddd6fe")
-
-    def io(name, label):
-        dot.node(name, label, shape="parallelogram", style="filled",
-                  fillcolor="#f5f3ff")
-
-    start_end("start", "User submits\nassessment answers")
-    io("answers", "answers = {question_id: likert_value}")
-    process("calc", "RecommendationService.calculate_scores()\n"
-                    "raw_score += answer_value × weight\nfor every mapped career")
-    process("norm", "RecommendationService.normalize_scores()\n"
-                    "score% = (raw_score ÷ career's own max) × 100")
-    process("rank", "RecommendationService.get_top_careers()\n"
-                    "sort all careers by score%, descending")
-    io("top3", "Top 3 careers + match %\nsaved to recommendations table")
-
-    dot.edge("start", "answers")
-    dot.edge("answers", "calc")
-    dot.edge("calc", "norm")
-    dot.edge("norm", "rank")
-    dot.edge("rank", "top3")
-
-    decision("choose", "User selects one\nrecommended career?")
-    process("reqskills", "SkillGapService.get_required_skills()\n"
-                         "fetch required skills for chosen career")
-    io("userskills", "User enters their\nexisting skills")
-    process("gap", "SkillGapService.analyze_skill_gap()\n"
-                   "compare required vs. existing skills")
-    process("readiness", "readiness% = (possessed ÷ required) × 100")
-    start_end("end", "Display possessed skills,\nmissing skills, and readiness%")
-
-    dot.edge("top3", "choose")
-    dot.edge("choose", "reqskills", label="Yes")
-    dot.edge("reqskills", "userskills")
-    dot.edge("userskills", "gap")
-    dot.edge("gap", "readiness")
-    dot.edge("readiness", "end")
-    dot.edge("choose", "end", label="No — view results only", style="dashed")
+    right_path = render_column(
+        "right",
+        nodes=[
+            ("choose", "User selects a\nrecommended career?", "diamond", DIAMOND, "black"),
+            ("reqskills", "get_required_skills()\nfetch required skills", "box", LILAC, "black"),
+            ("userskills", "User enters their\nexisting skills", "parallelogram", PALE, "black"),
+            ("gap", "analyze_skill_gap()\ncompare required vs. existing", "box", LILAC, "black"),
+            ("readiness", "readiness% = possessed ÷\nrequired × 100", "box", LILAC, "black"),
+            ("end", "Display possessed, missing\nskills and readiness%", "ellipse", PURPLE, "white"),
+        ],
+        edges=[
+            ("choose", "reqskills", "Yes", None),
+            ("reqskills", "userskills", None, None),
+            ("userskills", "gap", None, None),
+            ("gap", "readiness", None, None),
+            ("readiness", "end", None, None),
+        ],
+    )
 
     out_dir = BACKEND_DIR / "diagram_output"
     out_dir.mkdir(exist_ok=True)
-    out_path = out_dir / "Figure_3_2_Flowchart"
-    dot.render(str(out_path), format="png", cleanup=True)
-    dot.render(str(out_path), format="pdf", cleanup=True)
+    final_path = out_dir / "Figure_3_2_Flowchart.png"
+
+    stitch_columns_side_by_side(
+        [left_path, right_path], str(final_path),
+        connector_label="continues"
+    )
+
+    for p in TMP_DIR.glob("*.png"):
+        p.unlink()
+    TMP_DIR.rmdir()
 
     print("Flowchart generated successfully:")
-    print(f"  {out_path}.png")
-    print(f"  {out_path}.pdf")
+    print(f"  {final_path}")
 
 
 if __name__ == "__main__":
