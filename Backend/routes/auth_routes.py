@@ -98,7 +98,6 @@ def google_login():
         flash("Google login is not configured.", "error")
         return redirect(url_for("auth.login"))
     redirect_uri = url_for("auth.google_callback", _external=True)
-    print("GOOGLE CALLBACK URI:", redirect_uri)
     return oauth.google.authorize_redirect(redirect_uri)
 
 

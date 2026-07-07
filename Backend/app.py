@@ -60,8 +60,6 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-import os
-
 if __name__ == "__main__":
     # Check if we are running on Hugging Face or another cloud platform
     # Hugging Face sets a PORT environment variable automatically (usually 7860)

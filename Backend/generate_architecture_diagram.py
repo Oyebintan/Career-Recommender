@@ -65,12 +65,16 @@ def render_box(name, title, items, color):
         node_attr={"shape": "plaintext", "fontname": "Helvetica"},
     )
     rows = "".join(f'<TR><TD ALIGN="LEFT">{item}</TD></TR>' for item in items)
-    label = f'''
-        <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
-            <TR><TD BGCOLOR="{color}"><FONT COLOR="white"><B>{title}</B></FONT></TD></TR>
-            {rows}
-        </TABLE>
-    >'''
+    # Graphviz treats a label as HTML-like only when the string itself begins
+    # with '<' and ends with '>'. Keep the delimiters flush (no surrounding
+    # whitespace) so the table is parsed as HTML instead of printed literally.
+    title_html = title.replace("\n", "<BR/>")
+    label = (
+        '<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">'
+        f'<TR><TD BGCOLOR="{color}"><FONT COLOR="white"><B>{title_html}</B></FONT></TD></TR>'
+        f'{rows}'
+        '</TABLE>>'
+    )
     dot.node("box", label=label)
     TMP_DIR.mkdir(exist_ok=True)
     out_path = TMP_DIR / name
