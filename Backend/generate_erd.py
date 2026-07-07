@@ -92,12 +92,14 @@ def build_erd():
                     f"</TD></TR>"
                 )
 
-            label = f'''
-                <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6">
-                    <TR><TD BGCOLOR="#4c1d95"><FONT COLOR="white"><B>{table_name}</B></FONT></TD></TR>
-                    {rows}
-                </TABLE>
-            >'''
+            # Delimiters must be flush ('<...>' with no leading/trailing
+            # whitespace) or Graphviz prints the markup as literal text.
+            label = (
+                '<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6">'
+                f'<TR><TD BGCOLOR="#4c1d95"><FONT COLOR="white"><B>{table_name}</B></FONT></TD></TR>'
+                f'{rows}'
+                '</TABLE>>'
+            )
             dot.node(table_name, label=label)
 
         for table_name, table in tables.items():

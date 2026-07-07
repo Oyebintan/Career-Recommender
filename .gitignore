@@ -2,3 +2,8 @@ venv/
 __pycache__/
 .env
 *.pyc
+# diagram-generator temp working dirs
+_arch_tmp/
+_flowchart_col_tmp/
+_flowchart_row_tmp/
+_ch3_extracted.txt

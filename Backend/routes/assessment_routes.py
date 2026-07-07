@@ -1,6 +1,6 @@
 from flask import (
     Blueprint, render_template, request,
-    redirect, url_for, flash, session
+    redirect, url_for, flash
 )
 from flask_login import login_required, current_user
 
@@ -77,55 +77,22 @@ def submit():
         ))
 
     db.session.commit()
-    session["last_assessment_id"] = new_assessment.id
 
     return redirect(url_for(
-        "assessment.review",
+        "recommendation.results",
         assessment_id=new_assessment.id
     ))
 
 
-# ── Review page ───────────────────────────────────────────────────
+# ── Review (legacy) → redirect straight to results ────────────────
+# The assessment flow now goes directly from submission to the results
+# page (see submit() above), matching the documented user journey. This
+# route is kept only so any previously-shared /assessment/review links
+# still resolve instead of 404-ing.
 @assessment_bp.route("/assessment/review/<int:assessment_id>")
 @login_required
 def review(assessment_id):
-    record = Assessment.query.filter_by(
-        id      = assessment_id,
-        user_id = current_user.id
-    ).first_or_404()
-
-    questions_df  = _loader.load_assessment_questions()
-    questions_map = {
-        row["question_id"]: row["question"]
-        for _, row in questions_df.iterrows()
-    }
-
-    answers = AssessmentAnswer.query.filter_by(
+    return redirect(url_for(
+        "recommendation.results",
         assessment_id=assessment_id
-    ).all()
-
-    answer_display = [
-        {
-            "question": questions_map.get(a.question_id, "Unknown"),
-            "answer":   a.answer,
-            "label":    _likert_label(a.answer),
-        }
-        for a in answers
-    ]
-
-    return render_template(
-        "assessment_review.html",
-        assessment = record,
-        answers    = answer_display,
-        total      = len(answer_display),
-    )
-
-
-def _likert_label(value: int) -> str:
-    return {
-        1: "Strongly Disagree",
-        2: "Disagree",
-        3: "Neutral",
-        4: "Agree",
-        5: "Strongly Agree",
-    }.get(value, "Unknown")
+    ))

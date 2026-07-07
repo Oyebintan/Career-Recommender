@@ -111,7 +111,7 @@ def build_flowchart():
             ("start", "User submits\nassessment answers", "ellipse", PURPLE, "white"),
             ("answers", "answers = {question_id:\nlikert_value}", "parallelogram", PALE, "black"),
             ("calc", "calculate_scores()\nraw_score += answer × weight", "box", LILAC, "black"),
-            ("norm", "normalize_scores()\nscore% = raw ÷ own max × 100", "box", LILAC, "black"),
+            ("norm", "normalize_scores()\nscore% = raw ÷ top career score × 100", "box", LILAC, "black"),
             ("rank", "get_top_careers()\nsort by score%, descending", "box", LILAC, "black"),
             ("top3", "Top 3 careers + match %\nsaved to recommendations table", "parallelogram", PALE, "black"),
         ],
