@@ -50,7 +50,7 @@ career-recommender-project/
 │   ├── routes/                    # 5 blueprints: auth, profile, assessment,
 │   │                              #   recommendation, dashboard
 │   ├── services/                  # dataset_loader, recommendation, skill_gap
-│   ├── tests/                     # standalone verification scripts
+│   ├── tests/                     # pytest suite (unit + integration)
 │   ├── generate_*.py              # Chapter 3 diagram/code-image generators
 │   └── requirements.txt
 ├── Frontend/
@@ -99,6 +99,21 @@ career-recommender-project/
 
 ---
 
+## Running tests
+
+```bash
+cd Backend
+pip install -r requirements.txt pytest
+pytest
+```
+
+The suite uses a temporary SQLite database (created automatically) so it
+never touches the PostgreSQL instance configured in `.env`. It covers the
+dataset loader, recommendation and skill-gap services, models, and the full
+register → profile → assessment → results → skill-gap request flow.
+
+---
+
 ## How it works (summary)
 
 - **Recommendation** — for each answered question, every mapped career gains
@@ -126,7 +141,6 @@ and are not consumed by the Version 1 recommendation logic.
 
 ## Limitations & future work
 
-- Skill matching is currently an exact, case-sensitive string comparison.
 - The O*NET datasets require an occupation-matching layer before they can enrich
   the 42 modelled careers.
 - Datasets are re-read from disk per request (fine at current scale; a cache is
